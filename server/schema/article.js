@@ -7,11 +7,11 @@ var Schema = mongoose.Schema
 //构建Schema结构
 var articleSchema = new Schema({
 	title:{
-		// type: String,
-		smalltitle:{
-            type: String,
-		},
-		// required: true
+		type: String,
+		// smalltitle:{
+  //           type: String,
+		// },
+		required: true
 	},
 	content:{
 		type: String,
