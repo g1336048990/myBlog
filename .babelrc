@@ -2,9 +2,5 @@
     "presets": [
         ["es2015"]
     ],
-<<<<<<< HEAD
-    "plugins": ["transform-runtime", "transform-remove-strict-mode"],
-=======
     "plugins": ["transform-runtime", "transform-remove-strict-mode"]
->>>>>>> 1a06e3d9848f8a394cc35c900c37935a241feb99
 }
