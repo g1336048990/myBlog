@@ -11,15 +11,15 @@ module.exports = {
     },
     devServer: {
         // publicPath: '/dist/',
-        host: '192.168.89.213',//自定义主机ip显示形式，
-        hot: true,//热模块更新作用，需要安装webpack-dev-server
-        inline: true,//
+        host: 'localhost',//自定义主机ip显示形式，
+        // hot: true,//热模块更新作用，需要安装webpack-dev-server
+        // inline: true,//
         open: true,//是否自动打开浏览器
         port: 8888,//端口号
         //解决跨域问题，但是服务器设置了cros同源策略已经解决了，这个只是拿来备用，以防万一
         proxy: {
             '/api': {
-                target: "http://192.168.89.213:8889",
+                target: "localhost:8889",
                 changeOrigin: true,
                 pathRewrite: {
                     '^/api': 'api',
@@ -55,7 +55,7 @@ module.exports = {
     },
     plugins: [
         new htmlWebpackPlugin({
-            template: './src/index.html'
+            template: './index.html'
         }),
         new webpack.ProvidePlugin({
             jQuery: "jquery",
