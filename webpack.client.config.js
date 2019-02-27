@@ -55,7 +55,7 @@ module.exports = {
     },
     plugins: [
         new htmlWebpackPlugin({
-            template: './src/index.html'
+            template: './index.html'
         }),
         new webpack.ProvidePlugin({
             jQuery: "jquery",
