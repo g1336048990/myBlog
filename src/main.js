@@ -25,7 +25,7 @@ import Axios from 'axios';
 //Axios:挂载原型,全局定义
 Vue.prototype.$ajax = Axios;
 //Axios:默认配置
-Axios.defaults.baseURL = 'http://localhost:8889/';
+Axios.defaults.baseURL = 'http://192.168.89.213:8889/';
 
 //引入全部的element-ui的控件，后期打包会单独引入所需样式
 import ElementUI from 'element-ui';

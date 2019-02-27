@@ -4,7 +4,8 @@
 		  <nav class="navbar navbar-default" id="navbar">
 		    <div class="container">
 		      <div class="header-topbar hidden-xs link-border">
-		        <ul class="site-nav topmenu">
+						<!-- 暂时不开发先把基础弄完在开发 -->
+		        <!-- <ul class="site-nav topmenu">
 		          <li><router-link :to="{ name: 'frontTags' }">标签云</router-link></li>
 		          <li><router-link :to="{ name: 'frontReaders' }">读者墙</router-link></li>
 		          <li><router-link :to="{ name: 'frontLinks' }">友情链接</router-link></li>
@@ -15,20 +16,20 @@
 		              <li><a data-toggle="modal" data-target="#areDeveloping" rel="nofollow"><i class="fa fa-rss"></i> RSS</a></li>
 		            </ul>
 		          </li>
-		        </ul>
+		        </ul> -->
 		        <a data-toggle="modal" data-target="#loginModal" class="login" rel="nofollow">Hi,请登录</a>&nbsp;&nbsp;<a href="javascript:;" class="register" rel="nofollow">我要注册</a>&nbsp;&nbsp;<a href="" rel="nofollow">找回密码</a> </div>
 		      <div class="navbar-header">
 		        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#header-navbar" aria-expanded="false"> <span class="sr-only"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
-		        <h1 class="logo hvr-bounce-in"><a href="" title=""><img src="../../static/images/logo.png" alt=""></a></h1>
+		        <h1 class="logo hvr-bounce-in"></h1>
 		      </div>
 		      <div class="collapse navbar-collapse" id="header-navbar">
 		        <ul class="nav navbar-nav navbar-right">
 		          <li class="hidden-index active"><router-link :to="{ name: 'frontIndex' }">首页</router-link></li>
 		          <li><router-link :to="{ name: 'frontFrontCategory'}">前端技术</router-link></li>
 		          <li><router-link :to="{ name: 'frontBackCategory'}">后端技术</router-link></li>
-		          <li><router-link :to="{ name: 'control'}">管理系统</router-link></li>
 		          <li><router-link :to="{ name: 'frontResourses'}">授人以渔</router-link></li>
 		          <li><router-link :to="{ name: 'frontPersonalLife'}">程序人生</router-link></li>
+							<li><router-link :to="{ name: 'control'}">管理系统</router-link></li>
 		        </ul>
 		        <form class="navbar-form visible-xs" action="/Search" method="post">
 		          <div class="input-group">
