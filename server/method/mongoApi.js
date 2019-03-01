@@ -55,8 +55,9 @@ module.exports.idDelete = function(Obj, query){
 }
 //数据条数
 module.exports.dataCount = function(Obj, func){
-	Obj.find().countDocuments(function(err,num){
-		func(num)
+	Obj.find().count(function(err,num){
+		func(num);
+		console.log(num);
 	})
 }
 //根据id更新数据

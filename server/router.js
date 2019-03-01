@@ -30,7 +30,9 @@ router.all('*', (req, res, next) => {
 	}else if(req.url.indexOf('/control/deleteNotice') == 0){
 		next();
 	}
-
+	else if(req.url.indexOf('/server') == 0){
+		next();
+	}
 	else if(req.url.indexOf('/control/getTotal') == 0){
 		next();
 	}else if(req.url.indexOf('/change') == 0){

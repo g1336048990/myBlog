@@ -11,6 +11,7 @@ module.exports = {
     },
     devServer: {
         // publicPath: '/dist/',
+        // contentBase: false,
         host: '192.168.89.213',//自定义主机ip显示形式，
         open: true,//是否自动打开浏览器
         port: 8888,//端口号
