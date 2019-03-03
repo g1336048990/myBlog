@@ -7,7 +7,7 @@
             <li><router-link :to="{name:'backArticle'}">文章</router-link></li>
             <li><router-link :to="{name:'backNotice'}">公告</router-link></li>
             <li><router-link :to="{name:'comment'}">评论</router-link></li>
-            <li><a data-toggle="tooltip" data-placement="bottom" title="网站暂无留言功能">留言</a></li>
+            <!-- <li><a data-toggle="tooltip" data-placement="bottom" title="网站暂无留言功能">留言</a></li> -->
           </ul>
           <ul class="nav nav-sidebar">
             <li><router-link :to="{name:'backCategory'}">栏目</router-link></li>

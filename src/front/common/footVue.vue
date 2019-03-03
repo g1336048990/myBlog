@@ -1,11 +1,11 @@
 <template>
 	<div class="user-select">
-		<footer class="footer">
+		<!-- <footer class="footer">
 		  <div class="container">
 		    <p>&copy; 2016 <a href="">ylsat.com</a> &nbsp; <a href="#" target="_blank" rel="nofollow">豫ICP备20151109-1</a> &nbsp; &nbsp; <a href="http://www.mycodes.net/" target="_blank">源码之家</a></p>
 		  </div>
 		  <div id="gotop"><a class="gotop"></a></div>
-		</footer>
+		</footer> -->
 		
 		<!--该功能正在日以继夜的开发中-->
 		<div class="modal fade user-select" id="areDeveloping" tabindex="-1" role="dialog" aria-labelledby="areDevelopingModalLabel">
@@ -45,5 +45,4 @@
 	}
 </script>
 <style scoped>
-/* @import "../../static/frontStatic/css/style.css"; */
 </style>
