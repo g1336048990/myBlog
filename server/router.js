@@ -31,6 +31,7 @@ router.all('*', (req, res, next) => {
 		next();
 	}
 	else if(req.url.indexOf('/server') == 0){
+		res.end("");
 		next();
 	}
 	else if(req.url.indexOf('/control/getTotal') == 0){
