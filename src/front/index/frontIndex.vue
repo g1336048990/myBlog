@@ -4,9 +4,14 @@
 		    <div class="content">
 		      <div class="title">
 		        <h3>最新发布</h3>
-		        <div class="more"><a href="">PHP</a><a href="">JavaScript</a><a href="">EmpireCMS</a><a href="">Apache</a><a href="">MySQL</a></div>
+		        <div class="more">
+							<a href="">PHP</a>
+							<a href="">JavaScript</a>
+							<a href="">EmpireCMS</a>
+							<a href="">Apache</a>
+							<a href="">MySQL</a>
+						</div>
 		      </div>
-
 		      <article class="excerpt excerpt-1"><a class="focus" href="article.html" title=""><img class="thumb" data-original="../../static/images/excerpt.jpg" src="../../static/images/excerpt.jpg" alt=""></a>
 		        <header><a class="cat" href="program">VUE<i></i></a>
 		          <h2><router-link :to="{name: 'frontArticle'}">php如何判断一个日期的格式是否正确</router-link></h2>
@@ -76,7 +81,7 @@
 		    <div class="widget widget_sentence">
 		      <h3>每日一句</h3>
 		      <div class="widget-sentence-content">
-		        <h4>2016年01月05日星期二</h4>
+		        <h4>{{nowDate}}</h4>
 		        <p>Do not let what you cannot do interfere with what you can do.<br />
 		          别让你不能做的事妨碍到你能做的事。（John Wooden）</p>
 		      </div>
@@ -97,11 +102,23 @@
 	export default {
 		data(){
 			return{
-
+				nowDate:'',
 			}
 		},
 		created(){
+			let date = new Date();
+			let week = ["日", "一", "二", "三", "四", "五", "六"];
+			this.nowDate = date.getFullYear() + "年" + (date.getMonth() + 1) + "月" + date.getDate() + "日星期" + week[date.getDay()];
 		},
+		mounted() {
+			
+		},
+		methods:{
+			
+		},
+		watch:{
+			
+		}
 	}
 </script>
 <style scoped>
