@@ -18,7 +18,7 @@ module.exports = {
         //解决跨域问题，但是服务器设置了cros同源策略已经解决了，这个只是拿来备用，以防万一
         proxy: {
             '/api': {
-                target: "http://192.168.89.213:8889",
+                target: "http://localhost:8889",
                 changeOrigin: true,
                 pathRewrite: {
                     '^/api': 'api',

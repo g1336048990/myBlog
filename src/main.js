@@ -12,8 +12,6 @@ import "./static/css/font-awesome.min.css";
 //框架js引入
 import "./static/js/bootstrap.min.js";
 
-
-
 //ueditor文件引入
 import "./static/lib/ueditor/ueditor.config.js";
 import "./static/lib/ueditor/ueditor.all.min.js";
@@ -25,11 +23,10 @@ import Axios from 'axios';
 //Axios:挂载原型,全局定义
 Vue.prototype.$ajax = Axios;
 //Axios:默认配置
-Axios.defaults.baseURL = 'http://192.168.89.213:8889/';
+Axios.defaults.baseURL = 'http://localhost:8889/';
 
 //引入全部的element-ui的控件，后期打包会单独引入所需样式
-import ElementUI from 'element-ui';
-//引入element-ui样式以及js会自动到node_modules里去找
+import ElementUI from 'element-ui';//引入element-ui样式以及js会自动到node_modules里去找
 import 'element-ui/lib/theme-chalk/index.css';
 import 'element-ui/lib/index.js';
 //挂载element-ui
