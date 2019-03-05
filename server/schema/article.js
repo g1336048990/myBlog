@@ -1,11 +1,11 @@
 //引入模块
-var mongoose = require('mongoose')
+const mongoose = require('mongoose')
 //连接数据库
 mongoose.connect('mongodb://localhost/myblog', { useNewUrlParser: true })
 //实例Schema
-var Schema = mongoose.Schema
+const Schema = mongoose.Schema
 //构建Schema结构
-var articleSchema = new Schema({
+const articleSchema = new Schema({
 	title:{
 		type: String,
 		// smalltitle:{

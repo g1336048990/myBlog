@@ -21,7 +21,6 @@
 		          <span class="views"><i class="glyphicon glyphicon-eye-open"></i> 共120人围观</span> <a class="comment" href="article.html#comment"><i class="glyphicon glyphicon-comment"></i> 0个不明物体</a></p>
 		        <p class="note">可以用strtotime()把日期（$date）转成时间戳，再用date()按需要验证的格式转成一个日期，来跟$date比较是否相同来验证这个日期的格式是否是正确的。所以要验证日期格式 ... </p>
 		      </article>
-		      
 		      <nav class="pagination" style="display: none;">
 		        <ul>
 		          <li class="prev-page"></li>
@@ -34,50 +33,40 @@
 		    </div>
 		  </div>
 		  <aside class="sidebar">
-
 		    <div class="fixed">
-
 		      <div class="widget widget-tabs">
-
 		        <ul class="nav nav-tabs" role="tablist">
 		          <li role="presentation" class="active"><a href="#notice" aria-controls="notice" role="tab" data-toggle="tab">网站公告</a></li>
 		          <li role="presentation"><a href="#centre" aria-controls="centre" role="tab" data-toggle="tab">管理中心</a></li>
 		          <li role="presentation"><a href="#contact" aria-controls="contact" role="tab" data-toggle="tab">联系站长</a></li>
 		        </ul>
-
 		        <div class="tab-content">
-
 		          <div role="tabpanel" class="tab-pane notice active" id="notice">
 		            <ul>
 		              <li>
 		                <time datetime="2016-01-04">01-04</time>
-		                <a target="_blank" href="javascript:void(0);">欢迎访问郭羽的博客</a></li>
+		                <a target="_blank" href="javascript:void(0);">欢迎访问郭羽的博客</a>
+									</li>
 		              <li>
 		                <time datetime="2016-01-04">01-04</time>
-		                <a target="_blank" href="javascript:void(0);">博主是学前端的，所以博客内容大多关于前端知识！</a></li>
+		                <a target="_blank" href="javascript:void(0);">博主是学前端的，所以博客内容大多关于前端知识！</a>
+									</li>
 		              <li>
 		                <time datetime="2016-01-04">01-04</time>
-		                <a target="_blank" href="javascript:void(0);">在这个小工具中最多可以调用五条</a></li>
+		                <a target="_blank" href="javascript:void(0);">在这个小工具中最多可以调用五条</a>
+									</li>
 		            </ul>
 		          </div>
-
 		          <div role="tabpanel" class="tab-pane centre" id="centre">
 		            <h4>需要登录才能进入会员中心</h4>
 		          </div>
-
 		          <div role="tabpanel" class="tab-pane contact" id="contact">
 		            <h2>Email:<br />
 		              <a href="g1336048990@163.com" data-toggle="tooltip" data-placement="bottom" title="g1336048990@163.com">g1336048990@163.com</a></h2>
 		          </div>
-
 		        </div>
-
 		      </div>
-
-		      
-
 		    </div>
-
 		    <div class="widget widget_sentence">
 		      <h3>每日一句</h3>
 		      <div class="widget-sentence-content">
@@ -86,14 +75,12 @@
 		          别让你不能做的事妨碍到你能做的事。（John Wooden）</p>
 		      </div>
 		    </div>
-
 		    <div class="widget widget_hot">
 		      <h3>热门文章</h3>
 		      <ul>
 		        <li><a href=""><span class="thumbnail"><img class="thumb" data-original="../../static/images/excerpt.jpg" src="../../static/images/excerpt.jpg" alt=""></span><span class="text">php如何判断一个日期的格式是否正确</span><span class="muted"><i class="glyphicon glyphicon-time"></i> 2016-1-4 </span><span class="muted"><i class="glyphicon glyphicon-eye-open"></i> 120</span></a></li>	       
 		      </ul>
 		    </div>
-
 		  </aside>
 		</section>
 </template>

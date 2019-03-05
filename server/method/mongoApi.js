@@ -25,7 +25,7 @@ module.exports.upDate = function(Obj, query, jsonData){
 		}
 	})
 }
-//只要某列的数据,并且按照时间顺序降序
+//只要某些的数据,并且按照时间顺序降序
 module.exports.someFind = function(Obj, func, condition, timeCondition, indexPage){
 	Obj.find({}, condition, function(smallErr,ret){
 		if(smallErr){
@@ -58,6 +58,12 @@ module.exports.dataCount = function(Obj, func){
 	Obj.find().count(function(err,num){
 		func(num);
 		console.log(num);
+	})
+}
+//无条件获取所有数据
+module.exports.allFind = function(Obj, func){
+	Obj.find(function(err,num){
+		func(num);
 	})
 }
 //根据id更新数据

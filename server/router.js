@@ -1,15 +1,17 @@
 //引入核心模块
-var express = require('express')
-var formidable = require('formidable')
-var path = require('path')
+const express = require('express')
+const formidable = require('formidable')
+const path = require('path')
 //引入shcema
-var Article = require('./schema/article')
-var Notice = require('./schema/notice')
+const Article = require('./schema/article')
+const Notice = require('./schema/notice')
+const Category = require('./schema/category')
+
 //引入封装的函数
-var mongoApi = require('./method/mongoApi')
+const mongoApi = require('./method/mongoApi')
 // var baseMethod = require('./method/baseMethod')
 //实例路由
-var router = express.Router()
+const router = express.Router()
 
 // 配置全局路由拦截器，拦截不是规则内的请求,后期优化使用switch提高运行速度
 router.all('*', (req, res, next) => {
@@ -29,9 +31,9 @@ router.all('*', (req, res, next) => {
 		next();
 	}else if(req.url.indexOf('/control/deleteNotice') == 0){
 		next();
-	}
-	else if(req.url.indexOf('/server') == 0){
-		res.end("");
+	}else if(req.url.indexOf('/control/addCategory') == 0){
+		next();
+	}else if(req.url.indexOf('/control/category') == 0){
 		next();
 	}
 	else if(req.url.indexOf('/control/getTotal') == 0){
@@ -275,7 +277,7 @@ router.post('/control/updateNotice', function(req ,res){
 //删除文章
 router.get('/control/deleteNotice', function(req ,res){
 	mongoApi.idFind(Notice, req.query._id, success);
-	function success(data){
+	function success(){
 		mongoApi.idDelete(Notice, {_id:req.query._id});
 		return res.status(200).json({
 				err_code:0,
@@ -286,6 +288,20 @@ router.get('/control/deleteNotice', function(req ,res){
 	console.log('---------华丽而又不失优雅的分割线--------');
 })
 
+/*-------------------------------------------分割线（category配置）-------------------------------------------*/
+//添加文章栏目
+router.post('/control/addCategory', function(req, res){
+	console.log("添加栏目信息设置");
+	mongoApi.saveData(Category, req.body, res)
+})
+//显示所有文章栏目
+router.get('/control/category', function(req, res){
+	console.log("添加栏目信息设置");
+	mongoApi.allFind(Category, success);
+	function success(data){
+		res.status(200).json(data)
+	}
+})
 /*-------------------------------------------分割线（comment配置）-------------------------------------------*/
 // //显示数据库里面的所有文章
 // router.get('/control/Notice', function(req, res){

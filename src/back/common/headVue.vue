@@ -3,8 +3,7 @@
         <nav class="navbar navbar-default navbar-fixed-top">
           <div class="container-fluid">
             <div class="navbar-header">
-              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false"> <span class="sr-only">切换导航</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> 
-							</button>
+              <span class="show_header">个人博客后台管理系统</span>
 						</div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
               <ul class="nav navbar-nav navbar-right">
@@ -23,7 +22,8 @@
                   <input type="text" class="form-control" autocomplete="off" placeholder="键入关键字搜索" maxlength="15">
                   <span class="input-group-btn">
                   <button class="btn btn-default" type="submit">搜索</button>
-                  </span> </div>
+                  </span>
+								</div>
               </form>
             </div>
           </div>
@@ -49,6 +49,9 @@
 		}
 	}
 </script>
-<style>
-  
+<style lang="less">
+  .show_header{
+		font-size: 30px;
+		margin-left: 10px;
+	}
 </style>

@@ -1,7 +1,7 @@
-var mongoose = require('mongoose')
+const mongoose = require('mongoose')
 mongoose.connect('mongodb://localhost/myblog', { useNewUrlParser: true })
-var Schema = mongoose.Schema
-var NoticeSchema = new Schema({
+const Schema = mongoose.Schema
+const NoticeSchema = new Schema({
 	title:{
 		type: String,
 		required: true

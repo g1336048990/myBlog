@@ -15,13 +15,7 @@ var bodyParser = require('body-parser')
 //构建框架
 var app = express()
 
-//配置跨域请求2种方法，第一种cors策略
-// app.use(cors({
-//     origin:['http://localhost:8888'],
-//     methods:['GET','POST'],
-//     alloweHeaders:['Content-Type', 'Authorization']
-// }));
-//第二种设置响应头
+//配置跨域请求
 app.all('*',function (req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Headers', 'Content-Type, Content-Length, Authorization, Accept, X-Requested-With');
