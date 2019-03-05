@@ -27,7 +27,7 @@
                   <td>{{index+1}}</td>
                   <td>{{item.category}}</td>
                   <td>0</td>
-                  <td><a @click="deleteCategory()">暂时不进行删除功能</a></td>
+                  <td><a @click="deleteCategory()">暂时不设置删除功能</a></td>
                 </tr>
               </tbody>
             </table>
