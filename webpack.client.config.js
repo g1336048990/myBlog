@@ -12,7 +12,7 @@ module.exports = {
     devServer: {
         // publicPath: '/dist/',
         // contentBase: false,
-        host: '192.168.89.213',//自定义主机ip显示形式，
+        host: 'localhost',//自定义主机ip显示形式，
         open: true,//是否自动打开浏览器
         port: 8888,//端口号
         //解决跨域问题，但是服务器设置了cros同源策略已经解决了，这个只是拿来备用，以防万一

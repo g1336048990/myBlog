@@ -5,7 +5,7 @@
                 <h1 class="page-header">撰写新文章</h1>
                 <div class="form-group">
                     <label for="article-title" class="sr-only">标题</label>
-                    <input type="text" id="article-title" v-model="dataList.title.smalltitle" name="title" class="form-control" placeholder="在此处输入标题" required autofocus autocomplete="off">
+                    <input type="text" id="article-title" v-model="dataList.title" name="title" class="form-control" placeholder="在此处输入标题" required autofocus autocomplete="off">
                 </div>
                 <div class="form-group">
                     <label for="article-content" class="sr-only">内容</label>
@@ -33,11 +33,33 @@
                     <h2 class="add-article-box-title"><span>栏目</span></h2>
                     <div class="add-article-box-content">
                         <ul class="category-list">
-                            <li v-for="(item,index) in dataList.category" :key="index">
-                                <label>
-                                <input name="category" type="radio" :checked="item.checked" @click="changeChecked(index,dataList.category)">
-                                {{item.text}} </label>
+                            <li>
+								<input name="category" type="radio" id="Javascript" value="Javascript" v-model="dataList.category">
+								<label for="Javascript">Javascript</label>
                             </li>
+							<li>
+								<input name="category" type="radio" id="HTML" value="HTML" v-model="dataList.category">
+								<label for="HTML">HTML</label>
+							</li>
+							<li>
+								<input name="category" type="radio" id="CSS" value="CSS" v-model="dataList.category">
+								<label for="CSS">CSS</label>
+								
+							</li>
+							<li>
+								<input name="category" type="radio" id="Node" value="Node" v-model="dataList.category">
+								<label for="Node">Node</label>
+								
+							</li>
+							<li>
+								<input name="category" type="radio" id="Vue" value="Vue" v-model="dataList.category">
+								<label for="Vue">Vue</label>
+								
+							</li>
+							<li>
+								<input name="category" type="radio" id="React" value="React" v-model="dataList.category">
+								<label for="React">React</label>
+							</li>
                         </ul>
                     </div>
                 </div>
@@ -63,9 +85,10 @@
                         <p><label>状态：</label><span class="article-status-display">{{dataList.releaseStatus}}</span></p>
                         <p>
                             <label>公开度：</label>
-                            <span type="radio" v-for="(item,index) in dataList.visibility" :key="index">
-                            <input type="radio" name="visibility" value="0" :checked="item.checked" @click="changeChecked(index, dataList.visibility)">{{item.text}}
-                            </span> 
+                            <input name="visibility" type="radio" id="public" value="0" v-model="dataList.visibility">
+							<label for="public">公开的</label>
+							<input name="visibility" type="radio" id="secrect" value="1" v-model="dataList.visibility">
+							<label for="secrect">加密的</label>
                         </p>
                     </div>
                     <div class="add-article-box-footer">
@@ -85,22 +108,14 @@
                 fileList:[],
                 timeStamp:{categoryId:'', num:'0'},
                 dataList:{
-                    title:{
-                        smalltitle:''
-                    },
+                    title:'',
                     content:'',
                     keywords:'',
                     describe:'',
-                    category:[{ text: 'Javascript', checked: true },
-                              { text: 'HTML', checked: false },
-                              { text: 'CSS', checked: true },
-                              { text: 'Node', checked: false },
-                              { text: 'Vue', checked: true },
-                              { text: 'Java', checked: false }],
+                    category:'Javascript',
                     tags:'',
                     releaseStatus:"未发布",
-                    visibility:[{ text: '公开', checked: true },
-                                { text: '加密', checked: false }],
+                    visibility:'0',
                     createdTime:'',
                     lastTime:'',
                 }
@@ -112,20 +127,9 @@
         methods:{
             //加载完成初始化页面
             initLoad(){
-                $.each(this.dataList.category,function(index, item){
-                    item.checked = false;
-                })
-                this.dataList.category[0].checked = true;
                 this.$store.state.msg = '';
                 this.action = this.$store.state.action;
                 console.log('测试数据'+this.$store.state.action);
-            },
-            //改变当前选中状态并把当前状态存入数组中保存
-            changeChecked(id,data){
-                $.each(data,function(index, item){
-                    item.checked = false;
-                })
-                data[id].checked = true;
             },
             //错误弹窗
             open(errmsg,errmsgTitle){

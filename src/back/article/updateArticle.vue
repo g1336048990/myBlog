@@ -33,10 +33,32 @@
                     <h2 class="add-article-box-title"><span>栏目</span></h2>
                     <div class="add-article-box-content">
                         <ul class="category-list">
-                            <li v-for="(item,index) in dataList.category" :key="index">
-                                <label>
-                                <input name="category" type="radio" :checked="item.checked" @click="changeChecked(index,dataList.category)">
-                                {{item.text}} </label>
+                            <li>
+                            	<input name="category" type="radio" id="Javascript" value="Javascript" v-model="dataList.category">
+                            	<label for="Javascript">Javascript</label>
+                            </li>
+                            <li>
+                            	<input name="category" type="radio" id="HTML" value="HTML" v-model="dataList.category">
+                            	<label for="HTML">HTML</label>
+                            </li>
+                            <li>
+                            	<input name="category" type="radio" id="CSS" value="CSS" v-model="dataList.category">
+                            	<label for="CSS">CSS</label>
+                            	
+                            </li>
+                            <li>
+                            	<input name="category" type="radio" id="Node" value="Node" v-model="dataList.category">
+                            	<label for="Node">Node</label>
+                            	
+                            </li>
+                            <li>
+                            	<input name="category" type="radio" id="Vue" value="Vue" v-model="dataList.category">
+                            	<label for="Vue">Vue</label>
+                            	
+                            </li>
+                            <li>
+                            	<input name="category" type="radio" id="React" value="React" v-model="dataList.category">
+                            	<label for="React">React</label>
                             </li>
                         </ul>
                     </div>
@@ -63,9 +85,10 @@
                         <p><label>状态：</label><span class="article-status-display">{{dataList.releaseStatus}}</span></p>
                         <p>
                             <label>公开度：</label>
-                            <span type="radio" v-for="(item,index) in dataList.visibility" :key="index">
-                            <input type="radio" name="visibility" value="0" :checked="item.checked" @click="changeChecked(index, dataList.visibility)">{{item.text}}
-                            </span> 
+                            <input name="visibility" type="radio" id="public" value="0" v-model="dataList.visibility">
+                            <label for="public">公开的</label>
+                            <input name="visibility" type="radio" id="secrect" value="1" v-model="dataList.visibility">
+                            <label for="secrect">加密的</label>
                         </p>
                         <p><label>发布于：</label><span class="article-time-display"><input style="border: none;" type="datetime" name="time" v-model="dataList.createdTime" /></span></p>
                     </div>
@@ -94,13 +117,6 @@
         mounted(){
         },
         methods:{
-            //改变当前选中状态并把当前状态存入数组中保存
-            changeChecked(id,data){
-                $.each(data,function(index, item){
-                    item.checked = false;
-                })
-                data[id].checked = true;
-            },
             //错误弹窗
             open(errmsg,errmsgTitle){
                 this.$alert(errmsg, errmsgTitle, {

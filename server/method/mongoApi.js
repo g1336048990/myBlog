@@ -1,5 +1,6 @@
 //增加数据
 module.exports.saveData = function(Obj, jsonData, res){
+	// console.log(Obj, jsonData)
 	new Obj(jsonData).save(function(savsmallErr){
 		if(savsmallErr){
 			console.log("连接失败");

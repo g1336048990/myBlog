@@ -26,7 +26,7 @@ const articleSchema = new Schema({
 		required: true
 	},
 	category:{
-		type: Array,
+		type: String,
 		required: true
 	},
 	tags:{
@@ -46,7 +46,7 @@ const articleSchema = new Schema({
 		required: true
 	},
 	visibility:{
-		type: Array,
+		type: String,
 		required: true
 	},
 	createdTime:{

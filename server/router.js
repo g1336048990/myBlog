@@ -63,7 +63,7 @@ router.get('/control/article', function(req, res){
 })
 //增加文章/control/addArticle
 router.post('/control/addArticle', function(req, res){
-	// console.log(req.body);
+	console.log(req.body.title);
 	if(req.body.title == '' || req.body.title.length > 15){
 		return res.status(200).json({
 			err_code:1,
@@ -292,6 +292,7 @@ router.get('/control/deleteNotice', function(req ,res){
 //添加文章栏目
 router.post('/control/addCategory', function(req, res){
 	console.log("添加栏目信息设置");
+	console.log(req.body);
 	mongoApi.saveData(Category, req.body, res)
 })
 //显示所有文章栏目

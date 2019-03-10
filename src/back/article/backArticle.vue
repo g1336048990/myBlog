@@ -22,7 +22,7 @@
                     <tr v-for="(item, index) in dataList" :key="index">
                         <td>{{index+1}}</td>
                         <td class="article-title">{{item.title}}</td>
-                        <td>{{column[index]}}</td>
+                        <td>{{item.category}}</td>
                         <td class="hidden-sm">{{item.tags}}</td>
                         <td class="hidden-sm">0</td>
                         <td>{{detailTime[index]}}</td>
@@ -83,12 +83,6 @@
                     var temp = [];
                     var tempTime = [];
                     for(var i = 0; i < this.dataList.length; i++){
-                        for(var m = 0; m < this.dataList[i].category.length; m++){
-                            //编码时注意细节
-                            if(this.dataList[i].category[m].checked == true){
-                                temp[i] = this.dataList[i].category[m].text;
-                            }
-                        }
                         //时间戳是整形的数据，而我们接收到的数据是在一个字符串，所以我们要转换一下数据类型
                         tempTime[i] = time(Number(this.dataList[i].createdTime));   
                     }
@@ -101,7 +95,6 @@
                 })
             },
             getPage(){
-                console.log();
             },
             getTotal(title){
                 this.$ajax.get('/control/getTotal?name='+title)

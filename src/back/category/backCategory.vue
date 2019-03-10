@@ -23,7 +23,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr v-for="(item, index) in data" :key="index">
+                <tr v-for="(item, index) in datas" :key="index">
                   <td>{{index+1}}</td>
                   <td>{{item.category}}</td>
                   <td>0</td>
@@ -40,7 +40,10 @@
   export default {
     data(){
       return{
-				data:[],
+				data:{
+					category: ""
+				},
+				datas:[]
       }
     },
 		created(){
@@ -65,8 +68,8 @@
 			getData(){
 				this.$ajax.get("/control/category")
 				.then(res => {
-					console.log(res);
-					this.data = res.data;
+					console.log(res.data);
+					this.datas = res.data;
 				})
 				.catch(err => {
 					
