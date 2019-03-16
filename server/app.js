@@ -25,11 +25,12 @@ app.all('*',function (req, res, next) {
 //配置body-parser解析post,放置在路由前
 app.use(bodyParser.urlencoded({ entended: false}))
 app.use(bodyParser.json())
+//
+app.use("/static", express.static(__dirname))
 //挂载路由
 app.use(router)
 
-var port = 8889
 
 app.listen(8889, function(){
-	console.log('Server is running and port is '+ port +'....................')
+	console.log(`Server is running at date ${new Date()} and port is 8889....................`)
 })
