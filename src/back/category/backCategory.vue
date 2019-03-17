@@ -49,6 +49,7 @@
 		created(){
 			this.getData();
     },
+		inject:['reload'],
 		methods:{
 			//新增栏目
 			submitData(){
@@ -59,6 +60,7 @@
 				this.$ajax.post("/control/addCategory", this.data)
 				.then(res => {
 					console.log(res);
+					this.reload();
 				})
 				.catch(err => {
 					

@@ -33,33 +33,10 @@
                     <h2 class="add-article-box-title"><span>栏目</span></h2>
                     <div class="add-article-box-content">
                         <ul class="category-list">
-                            <li>
-								<input name="category" type="radio" id="Javascript" value="Javascript" v-model="dataList.category">
-								<label for="Javascript">Javascript</label>
+                            <li v-for="(item,index) in category" :key="index">
+								<input name="category" type="radio" :id="item.category" :value="item.category" v-model="dataList.category">
+								<label :for="item.category">{{item.category}}</label>
                             </li>
-							<li>
-								<input name="category" type="radio" id="HTML" value="HTML" v-model="dataList.category">
-								<label for="HTML">HTML</label>
-							</li>
-							<li>
-								<input name="category" type="radio" id="CSS" value="CSS" v-model="dataList.category">
-								<label for="CSS">CSS</label>
-								
-							</li>
-							<li>
-								<input name="category" type="radio" id="Node" value="Node" v-model="dataList.category">
-								<label for="Node">Node</label>
-								
-							</li>
-							<li>
-								<input name="category" type="radio" id="Vue" value="Vue" v-model="dataList.category">
-								<label for="Vue">Vue</label>
-								
-							</li>
-							<li>
-								<input name="category" type="radio" id="React" value="React" v-model="dataList.category">
-								<label for="React">React</label>
-							</li>
                         </ul>
                     </div>
                 </div>
@@ -73,7 +50,7 @@
                 <div class="add-article-box">
                     <h2 class="add-article-box-title"><span>标题图片</span></h2>
                     <div class="add-article-box-content">
-                        <el-upload class="upload-demo" ref="upload" :action="action"  :on-remove="handleRemove" :on-error="handleError" :data="timeStamp" :file-list="fileList" :limit="1" :auto-upload="false">
+                        <el-upload class="upload-demo" ref="upload" :action="action"  :on-remove="handleRemove" :data="timeStamp" :file-list="fileList" :limit="1" :auto-upload="false">
                             <el-button slot="trigger" size="small" type="primary">选取文件</el-button>
                             <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
                         </el-upload>
@@ -107,12 +84,13 @@
                 action:'',
                 fileList:[],
                 timeStamp:{categoryId:'', num:'0'},
+				category:[],
                 dataList:{
                     title:'',
                     content:'',
                     keywords:'',
                     describe:'',
-                    category:'Javascript',
+                    category:'node',
                     tags:'',
                     releaseStatus:"未发布",
                     visibility:'0',
@@ -176,13 +154,27 @@
                 .catch(err => {
                     open('请检查服务器是否启动！！', '提交失败')
                 })
-            }
+            },
+			//初始化表格
+			getData(){
+				this.$ajax.get("/control/category")
+				.then(res => {
+					console.log(res.data);
+					this.category = res.data;
+					console.log(this.dataList.category);
+				})
+				.catch(err => {
+					
+				})
+			},
         },
         created(){
             //初始化页面
-            this.initLoad();   
+            this.initLoad();
+			this.getData();
         },
         mounted(){
+			
         },
     }
 </script>

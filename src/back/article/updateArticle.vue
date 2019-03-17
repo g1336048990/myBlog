@@ -33,32 +33,9 @@
                     <h2 class="add-article-box-title"><span>栏目</span></h2>
                     <div class="add-article-box-content">
                         <ul class="category-list">
-                            <li>
-                            	<input name="category" type="radio" id="Javascript" value="Javascript" v-model="dataList.category">
-                            	<label for="Javascript">Javascript</label>
-                            </li>
-                            <li>
-                            	<input name="category" type="radio" id="HTML" value="HTML" v-model="dataList.category">
-                            	<label for="HTML">HTML</label>
-                            </li>
-                            <li>
-                            	<input name="category" type="radio" id="CSS" value="CSS" v-model="dataList.category">
-                            	<label for="CSS">CSS</label>
-                            	
-                            </li>
-                            <li>
-                            	<input name="category" type="radio" id="Node" value="Node" v-model="dataList.category">
-                            	<label for="Node">Node</label>
-                            	
-                            </li>
-                            <li>
-                            	<input name="category" type="radio" id="Vue" value="Vue" v-model="dataList.category">
-                            	<label for="Vue">Vue</label>
-                            	
-                            </li>
-                            <li>
-                            	<input name="category" type="radio" id="React" value="React" v-model="dataList.category">
-                            	<label for="React">React</label>
+                            <li v-for="(item,index) in category" :key="index">
+                            	<input name="category" type="radio" :id="item.category" :value="item.category" v-model="dataList.category">
+                            	<label :for="item.category">{{item.category}}</label>
                             </li>
                         </ul>
                     </div>
@@ -109,6 +86,7 @@
                 createdTime:'',
                 picList:[{name:''}],
                 dataList:{},
+				category:[]
             }
         },
         created(){
@@ -128,6 +106,16 @@
             handleRemove(file, fileList){
                 this.open('图片已移除，如果不再次选择图片，上传时会选择默认图片！！', '已删除图片');
             },
+			//初始化表格
+			getData(){
+				this.$ajax.get("/control/category")
+				.then(res => {
+					this.category = res.data;
+				})
+				.catch(err => {
+					
+				})
+			},
             getinfo(){
                 //获取url上的信息
                 const id = this.$route.query;
@@ -139,6 +127,7 @@
                     //状态管理器的使用
                     this.$store.state.msg = this.dataList.content;
                     this.picList[0].name = this.dataList.titlepic;
+					this.getData();
                 })
                 .catch(err => {
                     console.log(err);
