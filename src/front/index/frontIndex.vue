@@ -5,22 +5,35 @@
 		      <div class="title">
 		        <h3>最新发布</h3>
 		        <div class="more">
-							<a href="">PHP</a>
-							<a href="">JavaScript</a>
-							<a href="">EmpireCMS</a>
-							<a href="">Apache</a>
-							<a href="">MySQL</a>
+							<a v-for="(item,index) in category" :key="index">{{item.category}}</a>
 						</div>
 		      </div>
-		      <article class="excerpt excerpt-1"><a class="focus" href="article.html" title=""><img class="thumb" data-original="../../static/images/excerpt.jpg" src="../../static/images/excerpt.jpg" alt=""></a>
-		        <header><a class="cat" href="program">VUE<i></i></a>
-		          <h2><router-link :to="{name: 'frontArticle'}">php如何判断一个日期的格式是否正确</router-link></h2>
+					
+					
+		      <article class="excerpt excerpt-1" v-for="(item,index) in dataList">
+						<a class="focus" href="article.html" title="">
+							<img class="thumb" data-original="../../static/images/excerpt.jpg" src="../../static/images/excerpt.jpg" alt="">
+						</a>
+		        <header>
+							<a class="cat" href="program">{{item.category}}<i></i></a>
+		          <h2>
+								<router-link :to="{name: 'frontArticle'}">{{item.title}}</router-link>
+							</h2>
 		        </header>
 		        <p class="meta">
-		          <time class="time"><i class="glyphicon glyphicon-time"></i> 2016-1-4 10:29:39</time>
-		          <span class="views"><i class="glyphicon glyphicon-eye-open"></i> 共120人围观</span> <a class="comment" href="article.html#comment"><i class="glyphicon glyphicon-comment"></i> 0个不明物体</a></p>
-		        <p class="note">可以用strtotime()把日期（$date）转成时间戳，再用date()按需要验证的格式转成一个日期，来跟$date比较是否相同来验证这个日期的格式是否是正确的。所以要验证日期格式 ... </p>
+		          <time class="time">
+								<i class="glyphicon glyphicon-time"></i> {{detailTime[index]}}
+							</time>
+		          <span class="views">
+								<i class="glyphicon glyphicon-eye-open"></i> 共120人围观
+							</span> <a class="comment" href="article.html#comment">
+							<i class="glyphicon glyphicon-comment"></i> 0个不明物体</a>
+						</p>
+		        <p class="note">{{item.describe}}</p>
 		      </article>
+					
+					
+					
 		      <nav class="pagination" style="display: none;">
 		        <ul>
 		          <li class="prev-page"></li>
@@ -85,14 +98,20 @@
 		</section>
 </template>
 <script>
-
+	import time from '../../static/js/mytimer.js' 
 	export default {
 		data(){
 			return{
-				nowDate:'',
+				nowDate: '',
+				category: [],
+				indexPage: 0,
+				dataList: [],
+				detailTime:[],
 			}
 		},
 		created(){
+			this.getData();
+			this.initLoad(this.indexPage);
 			let date = new Date();
 			let week = ["日", "一", "二", "三", "四", "五", "六"];
 			this.nowDate = date.getFullYear() + "年" + (date.getMonth() + 1) + "月" + date.getDate() + "日星期" + week[date.getDay()];
@@ -101,7 +120,36 @@
 			
 		},
 		methods:{
-			
+			//初始化表格
+			getData(){
+				this.$ajax.get("/control/category")
+				.then(res => {
+					this.category = res.data;
+				})
+				.catch(err => {
+					
+				})
+			},
+			initLoad(indexPage){
+				this.$ajax.get('/control/article?indexPage='+indexPage)
+				.then(res => {
+						console.log(res.data);
+						this.dataList = res.data;
+						// var temp = [];
+						var tempTime = [];
+						for(var i = 0; i < this.dataList.length; i++){
+								//时间戳是整形的数据，而我们接收到的数据是在一个字符串，所以我们要转换一下数据类型
+								tempTime[i] = time(Number(this.dataList[i].createdTime));   
+						}
+						// this.column = temp;
+						this.detailTime = tempTime;
+						console.log(this.detailTime)
+						// this.getTotal('Article');
+				})
+				.catch(err => {
+						console.log(err);
+				})
+			},
 		},
 		watch:{
 			

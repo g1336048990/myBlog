@@ -20,10 +20,12 @@ import "./static/lib/ueditor/lang/zh-cn/zh-cn.js";
 //Axios:引入axios
 import Axios from 'axios';
 // Axios.defaults.headers.post['Content-Type']= 'application/x-www-form-urlencoded;charset=UTF-8';
+//Axios:初始化配置
+Axios.defaults.baseURL = 'http://localhost:8889/';
+Axios.defaults.timeout = 2000;
 //Axios:挂载原型,全局定义
 Vue.prototype.$ajax = Axios;
-//Axios:默认配置
-Axios.defaults.baseURL = 'http://localhost:8889/';
+
 
 //引入全部的element-ui的控件，后期打包会单独引入所需样式
 import ElementUI from 'element-ui';//引入element-ui样式以及js会自动到node_modules里去找
