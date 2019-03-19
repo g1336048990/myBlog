@@ -35,7 +35,11 @@ router.all('*', (req, res, next) => {
 		next();
 	}else if(req.url.indexOf('/control/category') == 0){
 		next();
+	}else if(req.url.indexOf('/view/') == 0){
+		next();
 	}
+	
+	
 	else if(req.url.indexOf('/control/getTotal') == 0){
 		next();
 	}else if(req.url.indexOf('/change') == 0){
@@ -377,6 +381,29 @@ router.get('/control/category', function(req, res){
 // 	}
 // 	console.log('---------华丽而又不失优雅的分割线--------');
 // })
+
+
+//前台视图,首页文章加载数据
+router.get("/view/index", (req, res) => {
+	mongoApi.allFind(Article, success);
+	function success(data) {
+		res.status(200).json(data);
+	}
+})
+
+//根据id获取文章信息
+router.get('/view/article', function(req ,res){
+	mongoApi.idFind(Article, req.query._id, success);
+	function success(data){
+		return res.status(200).json(data);
+	}
+})
+
+
+
+
+
+
 
 /*-------------------------------------------分割线（全局配置）-------------------------------------------*/
 

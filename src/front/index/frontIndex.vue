@@ -17,7 +17,7 @@
 		        <header>
 							<a class="cat" href="program">{{item.category}}<i></i></a>
 		          <h2>
-								<router-link :to="{name: 'frontArticle'}">{{item.title}}</router-link>
+								<router-link :to="{name: 'frontArticle', query:{_id: item._id}}">{{item.title}}</router-link>
 							</h2>
 		        </header>
 		        <p class="meta">
@@ -91,14 +91,15 @@
 		    <div class="widget widget_hot">
 		      <h3>热门文章</h3>
 		      <ul>
-		        <li v-for="(item,index) in category" :key="index">
+		        <li v-for="(item,index) in dataList" :key="index">
 							<a href="">
 								<span class="thumbnail">
 									<img class="thumb" data-original="../../static/images/excerpt.jpg" src="../../static/images/excerpt.jpg" alt="">
 								</span>
 								<span class="text">{{item.title}}</span>
 								<span class="muted"><i class="glyphicon glyphicon-time"></i> {{detailTime[index]}} </span>
-								<span class="muted"><i class="glyphicon glyphicon-eye-open"></i> 120</span></a></li>	       
+								<span class="muted"><i class="glyphicon glyphicon-eye-open"></i> 120</span></a>
+						</li>	       
 		      </ul>
 		    </div>
 		  </aside>
@@ -138,9 +139,8 @@
 				})
 			},
 			initLoad(indexPage){
-				this.$ajax.get('/control/article?indexPage='+indexPage)
+				this.$ajax.get('/view/index')
 				.then(res => {
-						console.log(res.data);
 						this.dataList = res.data;
 						// var temp = [];
 						var tempTime = [];
@@ -150,7 +150,6 @@
 						}
 						// this.column = temp;
 						this.detailTime = tempTime;
-						console.log(this.detailTime)
 						// this.getTotal('Article');
 				})
 				.catch(err => {

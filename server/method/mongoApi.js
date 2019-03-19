@@ -58,7 +58,6 @@ module.exports.idDelete = function(Obj, query){
 module.exports.dataCount = function(Obj, func){
 	Obj.find().count(function(err,num){
 		func(num);
-		console.log(num);
 	})
 }
 //无条件获取所有数据

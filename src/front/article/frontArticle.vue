@@ -4,29 +4,19 @@
 		  <div class="content-wrap">
 		    <div class="content">
 		      <header class="article-header">
-		        <h1 class="article-title"><a href="article.html">php如何判断一个日期的格式是否正确</a></h1>
+		        <h1 class="article-title"><a href="article.html">{{dataList.title}}</a></h1>
 		        <div class="article-meta"> <span class="item article-meta-time">
-		          <time class="time" data-toggle="tooltip" data-placement="bottom" title="时间：2016-1-4 10:29:39"><i class="glyphicon glyphicon-time"></i> 2016-1-4 10:29:39</time>
-		          </span> <span class="item article-meta-source" data-toggle="tooltip" data-placement="bottom" title="来源：第一PHP社区"><i class="glyphicon glyphicon-globe"></i> 第一PHP社区</span> <span class="item article-meta-category" data-toggle="tooltip" data-placement="bottom" title="栏目：后端程序"><i class="glyphicon glyphicon-list"></i> <a href="program" title="">后端程序</a></span> <span class="item article-meta-views" data-toggle="tooltip" data-placement="bottom" title="查看：120"><i class="glyphicon glyphicon-eye-open"></i> 共120人围观</span> <span class="item article-meta-comment" data-toggle="tooltip" data-placement="bottom" title="评论：0"><i class="glyphicon glyphicon-comment"></i> 0个不明物体</span> </div>
+		          <time class="time" data-toggle="tooltip" data-placement="bottom" title="时间：2016-1-4 10:29:39"><i class="glyphicon glyphicon-time"></i> {{dataList.createdTime}}</time>
+		          </span> <span class="item article-meta-source" data-toggle="tooltip" data-placement="bottom" title="来源：第一PHP社区"><i class="glyphicon glyphicon-globe"></i> 第一PHP社区</span> <span class="item article-meta-category" data-toggle="tooltip" data-placement="bottom" title="栏目：后端程序"><i class="glyphicon glyphicon-list"></i> <a href="program" title="">{{dataList.category}}</a></span> <span class="item article-meta-views" data-toggle="tooltip" data-placement="bottom" title="查看：120"><i class="glyphicon glyphicon-eye-open"></i> 共120人围观</span> <span class="item article-meta-comment" data-toggle="tooltip" data-placement="bottom" title="评论：0"><i class="glyphicon glyphicon-comment"></i> 0个不明物体</span> </div>
 		      </header>
 		      <article class="article-content">
 		        <p><img data-original="../../static/images/banner/banner_03.jpg" src="../../static/images/banner/banner_03.jpg" alt="" /></p>
-		        <p> 用php获取上个月最后一天的时间，有两种方法，都非常简单，详细实现源码如下： </p>
-		        <pre class="prettyprint lang-php">&lt;?php
-		  date_default_timezone_set("PRC"); //设置时区
-		  //方法一
-		  $times = date("d") * 24 * 3600;
-		  echo date("Y-m-d H:i:s", time()-$times);
-		  echo '&lt;br/&gt;';
-		  //方法二
-		  $day = date('d');
-		  echo date("Y-m-d H:i:s", strtotime(-$day.' day'));
-		?&gt;</pre>
-		        <p> 方法一是利用当前时间离本月初有多少时间，然后用当前时间减去这个时间差，就可以得到上月最后一天了。 </p>
-		        <p> 方法二是先计算本月多少号，即离月初有多少天，然后用strtotime计算出$day天前的时间戳，也可以得到上个月的最后一天。 </p>
-		        <p class="article-copyright hidden-xs">未经允许不得转载：<a href="">郭羽的博客</a> » <a href="article.html">php如何判断一个日期的格式是否正确</a></p>
+		        <p>{{dataList.describe}}</p>
+		        <pre class="prettyprint lang-php">
+								{{dataList.content}}
+						</pre>
 		      </article>
-		      <div class="article-tags">标签：<a href="" rel="tag">PHP</a></div>
+		      <div class="article-tags">标签：<a href="" rel="tag">{{dataList.category}}</a></div>
 		      <div class="relates">
 		        <div class="title">
 		          <h3>相关推荐</h3>
@@ -43,15 +33,15 @@
 		        </ul>
 		      </div>
 		      <div class="title" id="comment">
-		        <h3>评论 <small>抢沙发</small></h3>
+		        <h3>评论</h3>
 		      </div>
-		      <!--<div id="respond">
+		      <!-- <div id="respond">
 		        <div class="comment-signarea">
 		          <h3 class="text-muted">评论前必须登录！</h3>
 		          <p> <a href="javascript:;" class="btn btn-primary login" rel="nofollow">立即登录</a> &nbsp; <a href="javascript:;" class="btn btn-default register" rel="nofollow">注册</a> </p>
 		          <h3 class="text-muted">当前文章禁止评论</h3>
 		        </div>
-		      </div>-->
+		      </div> -->
 		      <div id="respond">
 		        <form action="" method="post" id="comment-form">
 		          <div class="comment">
@@ -78,7 +68,13 @@
 		          </li>
 		        </ol>
 		        
-		        <div class="quotes"><span class="disabled">首页</span><span class="disabled">上一页</span><a class="current">1</a><a href="">2</a><span class="disabled">下一页</span><span class="disabled">尾页</span></div>
+		        <div class="quotes">
+							<span class="disabled">首页</span>
+							<span class="disabled">上一页</span>
+							<a class="current">1</a><a href="">2</a>
+							<span class="disabled">下一页</span>
+							<span class="disabled">尾页</span>
+						</div>
 		      </div>
 		    </div>
 		  </div>
@@ -148,16 +144,37 @@
 </template>
 <script>
 	export default {
-		data(){
-			return{
-
+		data () {
+			return {
+				createdTime:'',
+				picList:[{name:''}],
+				dataList:{},
+				category:[]
 			}
 		},
-		created(){
-
+		created () {
+			this.getinfo();
+		},
+		methods: {
+			getinfo(){
+				//获取url上的信息
+				const id = this.$route.query;
+				this.$ajax.get('/view/article?_id='+id._id)
+				.then(res => {
+						this.dataList = res.data;
+						this.createdTime = this.dataList.createdTime;
+						this.dataList.createdTime = time(Number(this.dataList.createdTime));
+						//状态管理器的使用
+						this.$store.state.msg = this.dataList.content;
+						this.picList[0].name = this.dataList.titlepic;
+						// this.getData();
+				})
+				.catch(err => {
+						console.log(err);
+				})
+			},
 		}
 	}
 </script>
 <style scoped>
-@import "../../static/frontStatic/css/style.css";
 </style>
