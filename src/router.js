@@ -5,7 +5,7 @@ import VueRouter from 'vue-router';
 Vue.use(VueRouter);
 
 //登录页面
-import Login from './login/login.vue';
+import Login from './login/backLogin.vue';
 
 // 自定义组件引入(前台)
 //父视图
@@ -29,7 +29,7 @@ import UpdateArticle from './back/article/updateArticle.vue';
 import BackCategory from './back/category/backCategory.vue';
 import Comment from './back/common/comment.vue';
 import BackIndex from './back/index/backIndex.vue';
-import BackLogin from './back/login/backLogin.vue';
+
 import BackLoginLog from './back/login/backLoginLog.vue';
 import ManageUser from './back/manage/manageUser.vue';
 import AddNotice from './back/notice/addNotice.vue';
@@ -68,7 +68,6 @@ let router = new VueRouter({
 			{name: 'backCategory', path: 'Category', component: BackCategory},
 			{name: 'comment', path: 'comment', component: Comment},
 			{name: 'backIndex', path: 'index', component: BackIndex},
-			{name: 'backLogin', path: 'login', component: BackLogin},
 			{name: 'backLoginLog', path: 'loginLog', component: BackLoginLog},
 			{name: 'manageUser', path: 'manageUser', component: ManageUser},
 			{name: 'addNotice', path: 'addNotice', component: AddNotice},

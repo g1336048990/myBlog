@@ -36,4 +36,5 @@ import FootVue from './common/footVue.vue'
 </script>
 <style scoped>
 @import "../static/frontStatic/css/style.css";
+
 </style>
