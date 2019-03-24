@@ -19,6 +19,15 @@ import FootVue from './common/footVue.vue'
 
 			}
 		},
+		created() {
+			this.$ajax.post("/localhost", {"host":location.host})
+			.then(res => {
+				console.log(res);
+			})
+			.catch(err => {
+				console.log(err)
+			})
+		},
 		components:{
 			headVue:HeadVue,
 			footVue:FootVue

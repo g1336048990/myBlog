@@ -31,8 +31,12 @@ Vue.prototype.$ajax = Axios;
 import ElementUI from 'element-ui';//引入element-ui样式以及js会自动到node_modules里去找
 import 'element-ui/lib/theme-chalk/index.css';
 import 'element-ui/lib/index.js';
+
+import Iview from 'iview';
+import 'iview/dist/styles/iview.css';
 //挂载element-ui
 Vue.use(ElementUI);
+Vue.use(Iview);
 
 import Vuex from 'vuex'
 import store from './store.js'

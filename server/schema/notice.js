@@ -2,19 +2,7 @@ const mongoose = require('mongoose')
 mongoose.connect('mongodb://localhost/myblog', { useNewUrlParser: true })
 const Schema = mongoose.Schema
 const NoticeSchema = new Schema({
-	title:{
-		type: String,
-		required: true
-	},
 	content:{
-		type: String,
-		required: true
-	},
-	keywords:{
-		type: String,
-		required: true
-	},
-	describe:{
 		type: String,
 		required: true
 	},
@@ -23,7 +11,7 @@ const NoticeSchema = new Schema({
 		required: true
 	},
 	visibility:{
-		type: Array,
+		type: String,
 		required: true
 	},
 	createdTime:{

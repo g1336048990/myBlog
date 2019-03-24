@@ -8,38 +8,15 @@ const Schema = mongoose.Schema
 const articleSchema = new Schema({
 	title:{
 		type: String,
-		// smalltitle:{
-  //           type: String,
-		// },
 		required: true
 	},
 	content:{
 		type: String,
 		required: true
 	},
-	keywords:{
-		type: String,
-		required: true
-	},
-	describe:{
-		type: String,
-		required: true
-	},
 	category:{
 		type: String,
 		required: true
-	},
-	tags:{
-		type: String,
-		required: true
-	},
-	titlepic:{
-		type: String,
-		default:'excerpt.jpg'
-	},
-	picpath:{
-		type: String,
-		default:'C:/Users/lucas/Desktop/myblog/font-end/static/images/excerpt.jpg'
 	},
 	releaseStatus:{
 		type: String,

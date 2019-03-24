@@ -1,16 +1,14 @@
 <template>
 		<section class="container">
-		  <div class="content-wrap">
-		    <div class="content">
-		      <div class="title">
-		        <h3>最新发布</h3>
-		        <div class="more">
-							<a v-for="(item,index) in category" :key="index">{{item.category}}</a>
+				<div class="content-wrap">
+						<div class="content">
+						<div class="title">
+								<h3>最新发布</h3>
+								<div class="more">
+										<a v-for="(item,index) in category" :key="index">{{item.category}}</a>
+								</div>
 						</div>
-		      </div>
-					
-					
-		      <article class="excerpt excerpt-1" v-for="(item,index) in dataList">
+		      <article class="excerpt excerpt-1" v-for="(item,index) in dataList" :key="index">
 						<a class="focus" href="article.html" title="">
 							<img class="thumb" data-original="../../static/images/excerpt.jpg" src="../../static/images/excerpt.jpg" alt="">
 						</a>
@@ -31,9 +29,6 @@
 						</p>
 		        <p class="note">{{item.describe}}</p>
 		      </article>
-					
-					
-					
 		      <nav class="pagination" style="display: none;">
 		        <ul>
 		          <li class="prev-page"></li>
@@ -118,6 +113,7 @@
 			}
 		},
 		created(){
+			
 			this.getData();
 			this.initLoad(this.indexPage);
 			let date = new Date();

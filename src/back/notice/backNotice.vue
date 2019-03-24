@@ -18,7 +18,7 @@
                 <tbody>
                     <tr v-for="(item, index) in dataList" :key="index">
                         <td>{{index+1}}</td>
-                        <td class="Notice-title">{{item.title}}</td>
+                        <td class="Notice-title">{{item.content}}</td>
                         <td>{{detailTime[index]}}</td>
                         <td> <router-link :to="{name:'updateNotice', query:{_id:item._id}}">修改</router-link> <a @click="deleteNotice(item._id)">删除</a></td>
                     </tr>
@@ -28,7 +28,7 @@
         <footer class="message_footer">
             <nav>
                 <div class="block">
-                    <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="2" :page-sizes="[10]" :page-size="10" layout="total, sizes, prev, pager, next, jumper" :total="dataTotal">
+                    <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="1" :page-sizes="[10]" :page-size="10" layout="total, sizes, prev, pager, next, jumper" :total="dataTotal">
                     </el-pagination>
                 </div>
             </nav>
@@ -56,8 +56,7 @@
             handleSizeChange(val){
             },
             handleCurrentChange(val){
-                this.indexPage = val-1;
-                this.initLoad(this.indexPage);
+                
             },
             //错误弹窗
             open(errmsg,errmsgTitle){

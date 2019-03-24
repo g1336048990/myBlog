@@ -34,7 +34,7 @@
         <footer class="message_footer">
             <nav>
                 <div class="block">
-                    <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="2" :page-sizes="[10]" :page-size="10" layout="total, sizes, prev, pager, next, jumper" :total="dataTotal">
+                    <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="1" :page-sizes="[10]" :page-size="10" layout="total, sizes, prev, pager, next, jumper" :total="dataTotal">
                     </el-pagination>
                 </div>
             </nav>
@@ -46,7 +46,6 @@
     export default {
         data(){
             return{
-                column:[],
                 detailTime:[],
                 dataList:[],
                 dataTotal:0,
@@ -86,15 +85,12 @@
                         //时间戳是整形的数据，而我们接收到的数据是在一个字符串，所以我们要转换一下数据类型
                         tempTime[i] = time(Number(this.dataList[i].createdTime));   
                     }
-                    this.column = temp;
                     this.detailTime = tempTime;
                     this.getTotal('Article');
                 })
                 .catch(err => {
-                    console.log(err);
+                    this.$router.push({name: 'error404'})
                 })
-            },
-            getPage(){
             },
             getTotal(title){
                 this.$ajax.get('/control/getTotal?name='+title)
@@ -108,7 +104,6 @@
             deleteArticle(id){
                 this.$ajax.get('/control/deleteArticle?_id='+id)
                 .then(res => {
-                    //删除成功后重新刷新页面加载数据
                     this.reload();
                     this.open(res.data.msg, res.data.msgTitle);
                 })

@@ -66,6 +66,36 @@ module.exports.allFind = function(Obj, func){
 		func(num);
 	})
 }
+
+//无条件获取所有数据
+module.exports.oneFind = function(Obj, query, func){
+	Obj.findOne(query, function(err,num){
+		func(num);
+	})
+}
+
+module.exports.upDataComment = function(Obj, query, res){	
+// 	new Obj(query).save(function(err, succ){
+// 		console.log(err,succ);
+// 	});
+	Obj.updateOne({articleid: query.articleid}, {$push: {comment: query.comment}}, function(err){
+		if(err) {
+			console.log(err)
+		}else{
+			console.log("chengogng")
+			res.status(200).json("成功");
+		}
+	})
+}
+
+module.exports.findAllComment = (Obj, query, func) => {
+	Obj.findOne({articleid: query}, {comment: 1}, (err, num) => {
+		func(num);
+	})
+}
+
+
+
 //根据id更新数据
 // module.exports.idUpdata = function(Obj, query, func){
 // 	Obj.updataOne(query, function(smallErr,ret){

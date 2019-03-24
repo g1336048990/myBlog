@@ -6,6 +6,8 @@ const path = require('path')
 const Article = require('./schema/article')
 const Notice = require('./schema/notice')
 const Category = require('./schema/category')
+const Comment = require('./schema/comment')
+const Localhost = require('./schema/localhost')
 
 //引入封装的函数
 const mongoApi = require('./method/mongoApi')
@@ -15,6 +17,7 @@ const router = express.Router()
 
 // 配置全局路由拦截器，拦截不是规则内的请求,后期优化使用switch提高运行速度
 router.all('*', (req, res, next) => {
+	console.log("111")
 	if(req.url.indexOf('/control/article') == 0){
 		next();
 	}else if(req.url.indexOf('/control/addArticle') == 0){
@@ -38,7 +41,13 @@ router.all('*', (req, res, next) => {
 	}else if(req.url.indexOf('/view/') == 0){
 		next();
 	}
-	
+	else if(req.url.indexOf('/view/comment') == 0){
+		next();
+	}
+	else if(req.url.indexOf('/localhost') == 0){
+		console.log("xiaoguo");
+		next();
+	}
 	
 	else if(req.url.indexOf('/control/getTotal') == 0){
 		next();
@@ -54,6 +63,14 @@ router.all('*', (req, res, next) => {
 })
 
 
+router.post('/localhost', (req, res) => {
+	console.log(req.body);
+	mongoApi.saveData(Localhost, req.body, res);
+})
+
+
+
+
 /*-------------------------------------------分割线（Article配置）-------------------------------------------*/
 //显示数据库里面的所有文章
 router.get('/control/article', function(req, res){
@@ -67,7 +84,8 @@ router.get('/control/article', function(req, res){
 })
 //增加文章/control/addArticle
 router.post('/control/addArticle', function(req, res){
-	console.log(req.body.title);
+	console.log(req.body.content);
+	req.body.content = req.body.content.replace(/\n/gi, "<br />");
 	if(req.body.title == '' || req.body.title.length > 15){
 		return res.status(200).json({
 			err_code:1,
@@ -116,6 +134,7 @@ router.get('/control/updateArticle', function(req ,res){
 })
 //提交修改后的文章
 router.post('/control/updateArticle', function(req ,res){
+	req.body.content = req.body.content.replace(/\n/gi, "<br />");
 	mongoApi.idFind(Article, req.body._id, success);
 	function success(data){
 		mongoApi.upDate(Article, {_id:req.body._id}, {$set:req.body});
@@ -144,7 +163,7 @@ router.get('/control/deleteArticle', function(req ,res){
 //显示数据库里面的所有文章
 router.get('/control/Notice', function(req, res){
 	console.log('---------华丽而又不失优雅的分割线--------');
-	var condition = {title:1, createdTime:1};
+	var condition = {content:1, createdTime:1};
 	var timeCondition = {createdTime:-1};
 	mongoApi.someFind(Notice, success, condition, timeCondition, req.query.indexPage);
 	function success(data){
@@ -154,29 +173,11 @@ router.get('/control/Notice', function(req, res){
 //增加文章/control/addNotice
 router.post('/control/addNotice', function(req, res){
 	// console.log(req.body);
-	if(req.body.title == '' || req.body.title.length > 15){
-		return res.status(200).json({
-			err_code:1,
-			msg:'标题内容为空或过长，请重新输入内容！！',
-			msgTitle:'标题错误',
-		})
-	}else if(req.body.content == ''){
+	 if(req.body.content == ''){
 		return res.status(200).json({
 			err_code:1,
 			msg:'主要内容为空，请输入内容！！',
 			msgTitle:'内容错误',
-		})
-	}else if(req.body.keywords == ''){
-		return res.status(200).json({
-			err_code:1,
-			msg:'关键字内容为空，请输入内容！！',
-			msgTitle:'关键字错误',
-		})
-	}else if(req.body.describe == ''){
-		return res.status(200).json({
-			err_code:1,
-			msg:'描述内容为空，请输入内容！！',
-			msgTitle:'描述错误',
 		})
 	}else{
 		mongoApi.saveData(Notice, req.body, res);
@@ -399,10 +400,26 @@ router.get('/view/article', function(req ,res){
 	}
 })
 
+router.post('/view/comment', (req, res) => {
+	mongoApi.oneFind(Comment, {articleid: req.body.articleid}, success);
+	function success(data) {
+		if(data) {
+			console.log(data);
+			console.log("正确");
+			mongoApi.upDataComment(Comment, req.body, res);
+		}else{
+			console.log("错误");
+			mongoApi.saveData(Comment, req.body, res);
+		}
+	}
+})
 
-
-
-
+router.get('/view/comment', (req, res) => {
+	mongoApi.findAllComment(Comment, req.query.articleid, success);
+	function success(data){
+		res.status(200).json(data);
+	}
+})
 
 
 /*-------------------------------------------分割线（全局配置）-------------------------------------------*/

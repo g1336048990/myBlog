@@ -11,7 +11,7 @@ function getTime(time){
       miunte = miunte>9 ? miunte : "0" + miunte;
       var second = data.getSeconds();
       second = second>9 ? second : "0" + second;
-      var mytimer = year+"/"+month+"/"+date+" "+hour+":"+miunte+":"+second
+      var mytimer = year+"-"+month+"-"+date+" "+hour+":"+miunte+":"+second
       return mytimer
 }
 

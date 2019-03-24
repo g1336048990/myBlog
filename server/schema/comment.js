@@ -2,13 +2,13 @@ const mongoose = require('mongoose')
 mongoose.connect('mongodb://localhost/myblog', { useNewUrlParser: true })
 const Schema = mongoose.Schema
 const commentSchema = new Schema({
-	articleId:{
+	articleid: {
 		type: String,
 		required: true
 	},
-	comment:{
+	comment: {
 		type: Array,
 		required: true
 	},
 })
-module.exports = mongoose.model('Article', articleSchema)
+module.exports = mongoose.model('Comment', commentSchema)
