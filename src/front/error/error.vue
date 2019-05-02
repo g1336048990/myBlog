@@ -10,7 +10,7 @@
 		        </div>
 		        <div class="float-right"> <img src="../../static/images/404/right.png" width="260" class="hidden-xs" alt="" /> </div>
 		      </div>
-		      <div class="padding-big"> <a href="" class="btn btn-primary">返回首页</a> <a href="feedback" class="btn btn-default">保证不打死管理员</a> </div>
+		      <div class="padding-big"> <a class="btn btn-primary" @click="backIndex()">返回首页</a></div>
 		    </div>
 		  </div>
 		</section>
@@ -20,14 +20,17 @@
 	export default {
 		data(){
 			return{
-
 			}
-		}
+		},
+		methods: {
+			backIndex() {
+				this.$router.replace({name: 'frontIndex'})
+			}
+		},
 	}
 </script>
 <style scoped>
-/* @import "../../static/frontStatic/css/style.css"; */
-	.panel{
+.panel{
 	padding:80px 20px 0px;
 	min-height:500px;
 	cursor:default;
@@ -40,7 +43,6 @@
 	-moz-box-shadow: 0px 0px 5px rgba(0,0,0,.3);
 	-webkit-box-shadow: 0px 0px 5px rgba(0,0,0,.3);
 	box-shadow: 0px 0px 5px rgba(0,0,0,.1);
-	
 }
 .float-left {
     float: left !important;

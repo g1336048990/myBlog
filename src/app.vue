@@ -1,5 +1,5 @@
 <template>
-	<div id="app">
+	<div id="app" class='background_image'>
 		<!-- 留坑 -->
 		<router-view v-if="isRouterAlive"></router-view>
 	</div>
@@ -28,10 +28,19 @@
 					this.isRouterAlive = true;
 				});
 			}
-		}
+		},
+		watch: {
+			$route(to, from) {
+				if((/login/.test(to.path) || /login/.test(from.path)) && !(/loginLog/.test(to.path) || /loginLog/.test(from.path))) {
+					location.reload()
+				}
+			}
+		},
 		
 	}
 </script>
-<style>
-
+<style lang="less" scoped>
+	.background_image {
+		
+	}
 </style>

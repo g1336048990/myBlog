@@ -19,10 +19,12 @@ module.exports.saveData = function(Obj, jsonData, res){
 	})
 }
 //更新数据
-module.exports.upDate = function(Obj, query, jsonData){
+module.exports.upDate = function(Obj, query, jsonData, res){
 	Obj.updateOne(query, jsonData, function(smallErr){
 		if(smallErr){
 			throw smallErr;
+		}else {
+			res.status(200).json('chenggong')
 		}
 	})
 }
@@ -36,6 +38,27 @@ module.exports.someFind = function(Obj, func, condition, timeCondition, indexPag
 		}
 	}).sort(timeCondition).skip(Number(indexPage)*10).limit((Number(indexPage)+1)*10)
 }
+//查询出符合条件的数据,并且按照时间顺序降序
+module.exports.categoryFind = function(Obj, func, query, timeCondition, indexPage){
+	Obj.find(query, function(smallErr,ret){
+		if(smallErr){
+			throw smallErr;
+		}else{
+			func(ret);
+		}
+	}).sort(timeCondition).skip(Number(indexPage)*10).limit((Number(indexPage)+1)*10)
+}
+
+module.exports.categoryAllFind = function(Obj, func, timeCondition, indexPage){
+	Obj.find(function(smallErr,ret){
+		if(smallErr){
+			throw smallErr;
+		}else{
+			func(ret);
+		}
+	}).sort(timeCondition).skip(Number(indexPage)*10).limit((Number(indexPage)+1)*10)
+}
+
 //根据id找数据
 module.exports.idFind = function(Obj, query, func){
 	Obj.findById(query, function(smallErr,ret){
@@ -47,16 +70,33 @@ module.exports.idFind = function(Obj, query, func){
 	})
 }
 //删除数据
-module.exports.idDelete = function(Obj, query){
+module.exports.idDelete = function(Obj, query, res){
 	Obj.deleteOne(query, function(smallErr){
 		if(smallErr){
 			throw smallErr;
+		}else {
+			res.status(200).json('sahnchuchengong')
+		}
+	})
+}
+module.exports.manyRemove = function(Obj, query, res){
+	Obj.deleteMany(query, function(smallErr){
+		if(smallErr){
+			throw smallErr;
+		}else {
+			res.status(200).json('sahnchuchengong')
 		}
 	})
 }
 //数据条数
 module.exports.dataCount = function(Obj, func){
 	Obj.find().count(function(err,num){
+		func(num);
+	})
+}
+//数据条数,条件限制
+module.exports.dataCounts = function(Obj, condition, func){
+	Obj.find(condition).count(function(err,num){
 		func(num);
 	})
 }
@@ -67,6 +107,16 @@ module.exports.allFind = function(Obj, func){
 	})
 }
 
+//只要某些的数据,并且按照时间顺序降序
+module.exports.allFind_indexPage = function(Obj, func, indexPage){
+	Obj.find(function(smallErr,ret){
+		if(smallErr){
+			throw smallErr;
+		}else{
+			func(ret);
+		}
+	}).skip(Number(indexPage)*10).limit((Number(indexPage)+1)*10)
+}
 //无条件获取所有数据
 module.exports.oneFind = function(Obj, query, func){
 	Obj.findOne(query, function(err,num){
@@ -74,10 +124,7 @@ module.exports.oneFind = function(Obj, query, func){
 	})
 }
 
-module.exports.upDataComment = function(Obj, query, res){	
-// 	new Obj(query).save(function(err, succ){
-// 		console.log(err,succ);
-// 	});
+module.exports.upDataComment = function(Obj, query, res){
 	Obj.updateOne({articleid: query.articleid}, {$push: {comment: query.comment}}, function(err){
 		if(err) {
 			console.log(err)
@@ -95,42 +142,32 @@ module.exports.findAllComment = (Obj, query, func) => {
 }
 
 
+module.exports.idFindAndDeleteOne = (Obj, query, body, res) => {
+	delete body.createdTime;
+	console.log(body);
+	Obj.updateOne(query, {$pull: {"comment": body}}, function(err){
+		if(err) {
+		}else{
+			res.status(200).json("成功");
+		}
+	})
+}
 
-//根据id更新数据
-// module.exports.idUpdata = function(Obj, query, func){
-// 	Obj.updataOne(query, function(smallErr,ret){
-// 		if(smallErr){
-// 			throw smallErr;
-// 		}else{
-// 			func(ret);
-// 		}
-// 	})
-// }
-//所有数据
-// module.exports.allFind = function(Obj, func){
-// 	Obj.find(function(smallErr,ret){
-// 		if(smallErr){
-// 			throw smallErr;
-// 		}else{
-// 			console.log(ret.length);
-// 			func(ret);
-// 		}
-// 	})
-// }
-
-
-
-
-
-
-
-
-
-
-
-// Article.find({$or:[{picpath:''}, {titlepic:''}]}, function(smallErr,ret){
-        	// 	if(smallErr){
-        	// 		console.log('没有');
-        	// 	}
-        	// })
-        	// Article.remove
+module.exports.getFiveNotice = function(Obj, func, condition, timeCondition){
+	Obj.find({}, condition, function(smallErr,ret){
+		if(smallErr){
+			throw smallErr;
+		}else{
+			func(ret);
+		}
+	}).sort(timeCondition).skip(0).limit(5)
+}
+module.exports.getTenArticle = function(Obj, func, condition, timeCondition){
+	Obj.find({}, condition, function(smallErr,ret){
+		if(smallErr){
+			throw smallErr;
+		}else{
+			func(ret);
+		}
+	}).sort(timeCondition).skip(0).limit(10)
+}

@@ -9,8 +9,8 @@
 						</h1>
 						<div class="article-meta">
 							<span class="item article-meta-time">
-								<time class="time" data-toggle="tooltip" data-placement="bottom" :title="'创建时间：' + createdTime">
-									<i class="glyphicon glyphicon-time"></i>{{ createdTime }}
+								<time class="time" data-toggle="tooltip" data-placement="bottom" :title="'创建时间：' + dataList.createdTime">
+									<i class="glyphicon glyphicon-time"></i>{{ dataList.createdTime }}
 								</time>
 							</span>
 							<span class="item article-meta-source" data-toggle="tooltip" data-placement="bottom" title="来源：原文">
@@ -19,21 +19,21 @@
 							<span class="item article-meta-category" data-toggle="tooltip" data-placement="bottom" title="标签">
 								<i class="glyphicon glyphicon-list"></i>{{ dataList.category }}
 							</span>
-							<span class="item article-meta-views" data-toggle="tooltip" data-placement="bottom" title="查看：120">
-								<i class="glyphicon glyphicon-eye-open"></i>共120人围观
+							<span class="item article-meta-views" data-toggle="tooltip" data-placement="bottom" :title="'查看：' + dataList.count">
+								<i class="glyphicon glyphicon-eye-open"></i>{{dataList.count}}次点击
 							</span>
-							<span class="item article-meta-comment" data-toggle="tooltip" data-placement="bottom" title="评论：0">
-								<i class="glyphicon glyphicon-comment"></i>{{commentList.length}}个不明物体
+							<span class="item article-meta-comment" data-toggle="tooltip" data-placement="bottom" :title="'评论：' + dataList.comment">
+								<i class="glyphicon glyphicon-comment"></i>{{dataList.comment}}个不明物体
 							</span>
 						</div>
 					</header>
 					<article class="article-content">
 						 <p class="text-indent" v-for="(item, index) in content" :key="index">{{ item }}</p>
 					</article>
-					<div class="article-tags">
+					<!-- <div class="article-tags">
 						标签：
 						<a href="" rel="tag">{{ dataList.category }}</a>
-					</div>
+					</div> -->
 					<div class="relates">
 						<div class="title"><h3>相关推荐</h3></div>
 						<ul>
@@ -57,9 +57,6 @@
 								<div class="comment-box">
 									<textarea placeholder="您的评论可以一针见血" name="comment" id="comment-textarea" cols="100%" rows="3" tabindex="1" v-model="commentOne.comment.comment"></textarea>
 									<div class="comment-ctrl">
-										<span class="emotion">
-											<img src="../../static/images/face/5.png" width="20" height="20" alt="" /> 表情
-										</span>
 										<div class="comment-prompt">
 											<i class="fa fa-spin fa-circle-o-notch"></i>
 											<span class="comment-prompt-text"></span>
@@ -74,7 +71,6 @@
 					<div id="postcomments">
 						<ol class="commentlist">
 							<li class="comment-content" v-for="(item, index) in commentLists" :key="index">
-								<span class="comment-f">#1</span>
 								<div class="comment-avatar">
 									<img class="avatar" src="../../static/images/icon/icon.png" alt="" />
 								</div>
@@ -95,108 +91,20 @@
 					</div>
 				</div>
 			</div>
-			<aside class="sidebar">
-				<div class="fixed">
-					<div class="widget widget-tabs">
-						<ul class="nav nav-tabs" role="tablist">
-							<li role="presentation" class="active">
-								<a href="#notice" aria-controls="notice" role="tab" data-toggle="tab" > 网站公告 </a>
-							</li>
-							<li role="presentation">
-								<a href="#centre" aria-controls="centre" role="tab" data-toggle="tab" > 管理中心 </a>
-							</li>
-							<li role="presentation">
-								<a href="#contact" aria-controls="contact" role="tab" data-toggle="tab" > 联系站长 </a>
-							</li>
-						</ul>
-						<div class="tab-content">
-							<div role="tabpanel" class="tab-pane notice active" id="notice">
-								<ul>
-									<li>
-										<time datetime="2016-01-04">01-04</time>
-										<a target="_blank" href="javascript:void(0);"> 欢迎访问郭羽的博客 </a>
-									</li>
-									<li>
-										<time datetime="2016-01-04">01-04</time>
-										<a target="_blank" href="javascript:void(0);"> 博主是学前端的，所以博客内容大多关于前端知识！ </a>
-									</li>
-									<li>
-										<time datetime="2016-01-04">01-04</time>
-										<a target="_blank" href="javascript:void(0);"> 在这个小工具中最多可以调用五条 </a>
-									</li>
-								</ul>
-							</div>
-							<div role="tabpanel" class="tab-pane centre" id="centre">
-								<h4>需要登录才能进入会员中心</h4>
-							</div>
-							<div role="tabpanel" class="tab-pane contact" id="contact">
-								<h2>
-									Email:
-									<br />
-									<a href="g1336048990@163.com"
-										data-toggle="tooltip"
-										data-placement="bottom"
-										title="g1336048990@163.com"
-									>
-										g1336048990@163.com
-									</a>
-								</h2>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="widget widget_sentence">
-					<h3>每日一句</h3>
-					<div class="widget-sentence-content">
-						<h4>{{ nowDate }}</h4>
-						<p>
-							Do not let what you cannot do interfere with what you can do.
-							<br />
-							别让你不能做的事妨碍到你能做的事。（John Wooden）
-						</p>
-					</div>
-				</div>
-				<div class="widget widget_hot">
-					<h3>热门文章</h3>
-					<ul>
-						<li v-for="(item, index) in dataList" :key="index">
-							<a href="">
-								<span class="thumbnail">
-									<img
-										class="thumb"
-										data-original="../../static/images/excerpt.jpg"
-										src="../../static/images/excerpt.jpg"
-										alt=""
-									/>
-								</span>
-								<span class="text">{{ item.title }}</span>
-								<span class="muted">
-									<i class="glyphicon glyphicon-time"></i>
-									{{ detailTime[index] }}
-								</span>
-								<span class="muted">
-									<i class="glyphicon glyphicon-eye-open"></i>
-									120
-								</span>
-							</a>
-						</li>
-					</ul>
-				</div>
-			</aside>
+			<aside-vue></aside-vue>
 		</section>
 	</div>
 </template>
 <script>
-import time from '../../static/js/mytimer.js';
+	import time from '../../static/js/mytimer.js';
+	import AsideVue from '../common/asideVue.vue'
 export default {
 	data() {
 		return {
-			createdTime: '',
 			dataList: {},
 			category: [],
-			detailTime: [],
-			nowDate: '',
-			content: '',
+			content: [],
+			recordCount: {},
 			commentOne: {
 				articleid: '',
 				comment: {
@@ -209,11 +117,17 @@ export default {
 			commentLists: []
 		};
 	},
+	inject:['reload'],
+	components: {
+		asideVue:AsideVue
+	},
+	beforeRouteEnter(to, from, next) {
+		document.documentElement.scrollTop = 0
+		next()
+	},
 	created() {
 		this.getinfo();
 		this.getData();
-		
-		// this.initLoad(this.indexPage);
 		let date = new Date();
 		let week = ['日', '一', '二', '三', '四', '五', '六'];
 		this.nowDate =
@@ -225,6 +139,8 @@ export default {
 			'日星期' +
 			week[date.getDay()];
 	},
+	mounted() {
+	},
 	computed: {
 	},
 	methods: {
@@ -232,63 +148,40 @@ export default {
 		},
 		handleCurrentChange(val){
 			this.commentLists = this.commentList.slice((val - 1)*10, val*10);
-		    // this.initLoad(this.indexPage);
 		},
 		//初始化表格
 		getData() {
-			this.$ajax
-				.get('/control/category')
+			this.$ajax.get('/control/category')
 				.then(res => {
 					this.category = res.data;
 				})
 				.catch(err => {});
 		},
-		initLoad(indexPage) {
-			this.$ajax
-				.get('/view/index')
-				.then(res => {
-					this.dataList = res.data;
-					// var temp = [];
-					var tempTime = [];
-					for (var i = 0; i < this.dataList.length; i++) {
-						//时间戳是整形的数据，而我们接收到的数据是在一个字符串，所以我们要转换一下数据类型
-						tempTime[i] = time(Number(this.dataList[i].createdTime));
-					}
-					// this.column = temp;
-					this.detailTime = tempTime;
-					// this.getTotal('Article');
-				})
-				.catch(err => {
-					console.log(err);
-				});
-		},
 		getinfo() {
-			//获取url上的信息
 			const id = this.$route.query;
-			this.$ajax
-				.get('/view/article?_id=' + id._id)
+			this.$ajax.get('/view/article?_id=' + id._id)
 				.then(res => {
 					this.dataList = res.data;
 					this.commentOne.articleid = res.data._id;
 					this.commentOne.comment.comment = '';
 					this.content = res.data.content.split('<br />');
-					this.createdTime = time(Number(this.dataList.createdTime));
+					this.dataList.createdTime = time(Number(this.dataList.createdTime));
 					this.getComment();
-					// this.getData();
 				})
 				.catch(err => {
 					console.log(err);
 				});
 		},
 		postComment() {
-			if(this.commentOne.comment === ""){
+			if(this.commentOne.comment.comment === ""){
 				return false;
 			}
-			let date = new Date();
-			this.commentOne.comment.createTime = date.getFullYear() +'-'+ (date.getMonth() + 1) +'-'+ date.getDate();
+			console.log(this.commentOne)
+			this.commentOne.comment.createTime = Date.now();
 			this.$ajax.post('/view/comment', this.commentOne)
 			.then( res => {
-				console.log(res)
+				this.postArticleCount(this.commentOne.articleid, this.commentList.length)
+				this.reload()
 			})
 			.catch( err => {
 				console.log(err)
@@ -297,11 +190,21 @@ export default {
 		getComment() {
 			this.$ajax.get('/view/comment?articleid='+this.commentOne.articleid)
 			.then( res => {
-				this.commentList = res.data.comment;
-				this.commentLists = this.commentList.slice(0, 10);
+				if('comment' in res.data) {
+					this.commentList = res.data.comment.reverse();
+					this.commentLists = this.commentList.slice(0, 10);
+				}
 			})
 			.catch( err => {
 				console.log(err)
+			})
+		},
+		postArticleCount(_id, count) {
+			this.recordCount.comment = (count+1);
+			this.$ajax.post('/view_clickArticle?_id='+_id, this.recordCount)
+			.then(res => {
+			})
+			.catch(err => {
 			})
 		}
 	}

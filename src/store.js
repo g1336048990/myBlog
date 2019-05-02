@@ -6,9 +6,8 @@ Vue.use(Vuex)
 const store = new Vuex.Store({
 	state:{
 		msg:'',
-		//图片上传地址配置，以后优化，现在能力有限很多东西弄不了
-		action:'http://localhost:8889/change'
-	}
+		onedata:{}
+	},
 })
 
 export default store

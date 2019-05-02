@@ -3,7 +3,7 @@ import Vue from 'vue';
 import 'jquery'
 // 引入自己的文件
 import App from './app.vue';
-import router from './router.js'
+import router from './router.js';
 
 //框架样式引入
 import "./static/css/bootstrap.min.css";
@@ -16,13 +16,14 @@ import "./static/js/bootstrap.min.js";
 import "./static/lib/ueditor/ueditor.config.js";
 import "./static/lib/ueditor/ueditor.all.min.js";
 import "./static/lib/ueditor/lang/zh-cn/zh-cn.js";
+import "./static/lib/ueditor/themes/default/css/ueditor.min.css";
 
 //Axios:引入axios
 import Axios from 'axios';
 // Axios.defaults.headers.post['Content-Type']= 'application/x-www-form-urlencoded;charset=UTF-8';
 //Axios:初始化配置
 Axios.defaults.baseURL = 'http://localhost:8889/';
-Axios.defaults.timeout = 2000;
+// Axios.defaults.timeout = 2000;
 //Axios:挂载原型,全局定义
 Vue.prototype.$ajax = Axios;
 
@@ -46,6 +47,21 @@ Vue.use(Vuex)
 
 // 引入自定义样式
 // 引入自定义js
+import getTime from './static/js/mytimer'
+Vue.prototype.timeStrmp = getTime;
+
+router.beforeEach((to, from, next) => {
+	if(/control/.test(to.path)) {
+		if('login' in localStorage) {
+			next()
+		}else {
+			next({name: 'login'})
+		}
+	}else {
+		next()
+	}
+})
+
 
 new Vue({
 	el:'#app',

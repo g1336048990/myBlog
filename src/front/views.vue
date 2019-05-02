@@ -10,23 +10,12 @@
 <script>
 import HeadVue from './common/headVue.vue'
 import FootVue from './common/footVue.vue'
-
 	export default {
-
 		data(){
-
 			return{
-
 			}
 		},
 		created() {
-			this.$ajax.post("/localhost", {"host":location.host})
-			.then(res => {
-				console.log(res);
-			})
-			.catch(err => {
-				console.log(err)
-			})
 		},
 		components:{
 			headVue:HeadVue,

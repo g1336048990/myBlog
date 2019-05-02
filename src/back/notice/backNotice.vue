@@ -56,7 +56,8 @@
             handleSizeChange(val){
             },
             handleCurrentChange(val){
-                
+                this.indexPage = val-1;
+                this.initLoad(this.indexPage);
             },
             //错误弹窗
             open(errmsg,errmsgTitle){
@@ -69,7 +70,6 @@
             initLoad(indexPage){
                 this.$ajax.get('/control/notice?indexPage='+indexPage)
                 .then(res => {
-                    console.log(res.data);
                     this.dataList = res.data;
                     var tempTime = [];
                     for(var i = 0; i < this.dataList.length; i++){

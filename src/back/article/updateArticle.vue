@@ -101,7 +101,6 @@
             },
             updataArticle(){
                 this.dataList.content = this.$refs.ue.getUEContent();
-				console.log(this.dataList.content);
                 this.dataList.lastTime = new Date().getTime();
                 this.dataList.createdTime = this.createdTime;
                 this.$ajax.post('/control/updateArticle', this.dataList)

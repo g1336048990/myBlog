@@ -586,7 +586,7 @@ color:#FFF;
 .excerpt {
 	clear: both;
 	border: 1px solid #EAEAEA;
-	padding: 20px 20px 20px 255px;
+	padding: 20px 20px 20px 20px;
 	overflow: hidden;
 	background-color: #fff;
 	margin-bottom: -1px;
@@ -1361,7 +1361,7 @@ color:#FFF;
 }
 /*侧边栏热门文章*/
 .widget_hot li a {
-	padding: 10px 15px 10px 150px;
+	padding: 10px 15px 10px 10px;
 	color: #888;
 	border-bottom: solid 1px #eee;
 	overflow: hidden;

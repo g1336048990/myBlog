@@ -12,7 +12,6 @@
                         <th><span class="glyphicon glyphicon-th-large"></span> <span class="">序号</span></th>
                         <th><span class="glyphicon glyphicon-file"></span> <span class="">标题</span></th>
                         <th><span class="glyphicon glyphicon-list"></span> <span class="">栏目</span></th>
-                        <th class="hidden-sm"><span class="glyphicon glyphicon-tag"></span> <span class="">标签</span></th>
                         <th class="hidden-sm"><span class="glyphicon glyphicon-comment"></span> <span class="">评论条数</span></th>
                         <th><span class="glyphicon glyphicon-time"></span> <span class="">创建时间</span></th>
                         <th><span class="glyphicon glyphicon-pencil"></span> <span class="">操作</span></th>
@@ -23,7 +22,6 @@
                         <td>{{index+1}}</td>
                         <td class="article-title">{{item.title}}</td>
                         <td>{{item.category}}</td>
-                        <td class="hidden-sm">{{item.tags}}</td>
                         <td class="hidden-sm">0</td>
                         <td>{{detailTime[index]}}</td>
                         <td> <router-link :to="{name:'updateArticle', query:{_id:item._id}}">修改</router-link> <a @click="deleteArticle(item._id)">删除</a></td>
@@ -45,12 +43,12 @@
     import time from '../../static/js/mytimer.js' 
     export default {
         data(){
-            return{
-                detailTime:[],
-                dataList:[],
-                dataTotal:0,
-                indexPage:0,
-            }
+			return{
+				detailTime: [],
+				dataList: [],
+				dataTotal: 0,
+				indexPage: 0,
+			}
         },
         inject:['reload'],
         created(){
@@ -77,7 +75,6 @@
             initLoad(indexPage){
                 this.$ajax.get('/control/article?indexPage='+indexPage)
                 .then(res => {
-                    console.log(res.data);
                     this.dataList = res.data;
                     var temp = [];
                     var tempTime = [];

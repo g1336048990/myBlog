@@ -59,7 +59,6 @@
 				}
 				this.$ajax.post("/control/addCategory", this.data)
 				.then(res => {
-					console.log(res);
 					this.reload();
 				})
 				.catch(err => {
@@ -70,7 +69,6 @@
 			getData(){
 				this.$ajax.get("/control/category")
 				.then(res => {
-					console.log(res.data);
 					this.datas = res.data;
 				})
 				.catch(err => {

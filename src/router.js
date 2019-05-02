@@ -12,9 +12,7 @@ import Login from './login/backLogin.vue';
 import Views from './front/views.vue';
 // 内容开始
 import FrontArticle from './front/article/frontArticle.vue';
-import FrontFrontCategory from './front/category/frontFrontCategory.vue';
-import FrontBackCategory from './front/category/frontBackCategory.vue';
-import FrontError404 from './front/error404/error404.vue';
+import FrontError from './front/error/error.vue';
 import FrontIndex from './front/index/frontIndex.vue';
 
 // 内容结束
@@ -28,6 +26,7 @@ import BackArticle from './back/article/backArticle.vue';
 import UpdateArticle from './back/article/updateArticle.vue';
 import BackCategory from './back/category/backCategory.vue';
 import Comment from './back/common/comment.vue';
+import Comments from './back/common/comments.vue';
 import BackIndex from './back/index/backIndex.vue';
 
 import BackLoginLog from './back/login/backLoginLog.vue';
@@ -38,6 +37,10 @@ import UpdateNotice from './back/notice/UpdateNotice.vue';
 import ReadSet from './back/readSet/readSet.vue';
 import Setting from './back/setting/setting.vue';
 // 内容结束
+
+
+
+
 
 let router = new VueRouter({
 	// 设置router-link
@@ -50,15 +53,12 @@ let router = new VueRouter({
 		{path: '/', redirect: { name: 'frontIndex' }},
 		{path: '/views', redirect: { name: 'frontIndex' }},
 		{path: '/control', redirect: { name: 'backIndex' }},
-        {path: '/login', redirect: { name: 'login' }},
 		//登录路由
-		{name: 'login', path:'login', component: Login},
+		{name: 'login', path:'/login', component: Login},
 		//前台视图
 		{name: 'views', path: '/views', component: Views, children:[
 			{name: 'frontIndex', path: 'index', component: FrontIndex},
 			{name: 'frontArticle', path: 'article', component: FrontArticle},
-			{name: 'frontFrontCategory', path: 'frontCategory', component: FrontFrontCategory},
-			{name: 'frontBackCategory', path: 'backCategory', component: FrontBackCategory},
 		]},
 		//后台视图
 		{name: 'control', path: '/control', component: Control, children:[
@@ -67,6 +67,7 @@ let router = new VueRouter({
 			{name: 'updateArticle', path: 'updateArticle', component: UpdateArticle},
 			{name: 'backCategory', path: 'Category', component: BackCategory},
 			{name: 'comment', path: 'comment', component: Comment},
+			{name: 'comments', path: 'comments', component: Comments},
 			{name: 'backIndex', path: 'index', component: BackIndex},
 			{name: 'backLoginLog', path: 'loginLog', component: BackLoginLog},
 			{name: 'manageUser', path: 'manageUser', component: ManageUser},
@@ -76,7 +77,7 @@ let router = new VueRouter({
 			{name: 'readSet', path: 'readSet', component: ReadSet},
 			{name: 'setting', path: 'setting', component: Setting},
 		]},
-		{name: 'error404', path: '*', component: FrontError404}
+		{name: 'error', path: '*', component: FrontError}
 	],
 
 })

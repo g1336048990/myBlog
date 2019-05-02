@@ -1,58 +1,5 @@
 <template>
 	<div>
-		<!-- 个人信息模态框 -->
-    <div class="modal fade" id="seeUserInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-      <div class="modal-dialog" role="document">
-        <form action="" method="post">
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-              <h4 class="modal-title" >个人信息</h4>
-            </div>
-            <div class="modal-body">
-              <table class="table" style="margin-bottom:0px;">
-                <thead>
-                  <tr> </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td wdith="20%">姓名:</td>
-                    <td width="80%"><input type="text" value="王雨" class="form-control" name="truename" maxlength="10" autocomplete="off" /></td>
-                  </tr>
-                  <tr>
-                    <td wdith="20%">用户名:</td>
-                    <td width="80%"><input type="text" value="admin" class="form-control" name="username" maxlength="10" autocomplete="off" /></td>
-                  </tr>
-                  <tr>
-                    <td wdith="20%">电话:</td>
-                    <td width="80%"><input type="text" value="18538078281" class="form-control" name="usertel" maxlength="13" autocomplete="off" /></td>
-                  </tr>
-                  <tr>
-                    <td wdith="20%">旧密码:</td>
-                    <td width="80%"><input type="password" class="form-control" name="old_password" maxlength="18" autocomplete="off" /></td>
-                  </tr>
-                  <tr>
-                    <td wdith="20%">新密码:</td>
-                    <td width="80%"><input type="password" class="form-control" name="password" maxlength="18" autocomplete="off" /></td>
-                  </tr>
-                  <tr>
-                    <td wdith="20%">确认密码:</td>
-                    <td width="80%"><input type="password" class="form-control" name="new_password" maxlength="18" autocomplete="off" /></td>
-                  </tr>
-                </tbody>
-                <tfoot>
-                  <tr></tr>
-                </tfoot>
-              </table>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-              <button type="submit" class="btn btn-primary">提交</button>
-            </div>
-          </div>
-        </form>
-      </div>
-    </div>
     <!-- 个人登录记录模态框 -->
     <div class="modal fade" id="seeUserLoginlog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
       <div class="modal-dialog" role="document">
@@ -108,7 +55,7 @@
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             <h4 class="modal-title" id="WeChatModalLabel" style="cursor:default;">微信扫一扫</h4>
           </div>
-          <div class="modal-body" style="text-align:center"> <img src="images/weixin.jpg" alt="" style="cursor:pointer"/> </div>
+          <div class="modal-body" style="text-align:center"> <img src="../../static/images/weixin.jpg" alt="" style="cursor:pointer;width: 80%;height: 70%;"/> </div>
         </div>
       </div>
     </div>
@@ -121,7 +68,7 @@
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
           <h4 class="modal-title" id="areDevelopingModalLabel" style="cursor:default;">该功能正在日以继夜的开发中…</h4>
         </div>
-        <div class="modal-body"> <img src="images/baoman/baoman_01.gif" alt="深思熟虑" />
+        <div class="modal-body"> <img src="../../static/images/baoman/baoman_01.gif" alt="深思熟虑" />
           <p style="padding:15px 15px 15px 100px; position:absolute; top:15px; cursor:default;">很抱歉，程序猿正在日以继夜的开发此功能，本程序将会在以后的版本中持续完善！</p>
         </div>
         <div class="modal-footer">
@@ -130,6 +77,56 @@
       </div>
     </div>
   </div>
+	
+	<!-- 用户添加模态框 -->
+	<div class="modal fade" id="addUser" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	  <div class="modal-dialog" role="document">
+	    <div>
+	      <div class="modal-content">
+	        <div class="modal-header">
+	          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	          <h4 class="modal-title" >添加用户</h4>
+	        </div>
+	        <div class="modal-body">
+	          <table class="table" style="margin-bottom:0px;">
+	            <thead>
+	              <tr> </tr>
+	            </thead>
+	            <tbody>
+	              <tr>
+	                <td wdith="20%">姓名:</td>
+	                <td width="80%"><input type="text" class="form-control" required v-model="addUserInfo.name" /></td>
+	              </tr>
+	              <tr>
+	                <td wdith="20%">用户名:</td>
+	                <td width="80%"><input type="text" class="form-control" required v-model="addUserInfo.userName" /></td>
+	              </tr>
+	              <tr>
+	                <td wdith="20%">电话:</td>
+	                <td width="80%"><input type="number" class="form-control" required v-model="addUserInfo.telephone" /></td>
+	              </tr>
+	              <tr>
+	                <td wdith="20%">密码:</td>
+	                <td width="80%"><input type="password" class="form-control" required v-model="addUserInfo.passPwd" /></td>
+	              </tr>
+	              <tr>
+	                <td wdith="20%">确认密码:</td>
+	                <td width="80%"><input type="password" class="form-control" required v-model="addUserInfo.truePassWord" /></td>
+	              </tr>
+	            </tbody>
+	            <tfoot>
+	              <tr></tr>
+	            </tfoot>
+	          </table>
+	        </div>
+	        <div class="modal-footer">
+	          <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+	          <button type="button" class="btn btn-primary" @click="addUser()">提交</button>
+	        </div>
+	      </div>
+	    </div>
+	  </div>
+	</div>
 
   <!--右键菜单列表-->
   <div id="rightClickMenu">
@@ -147,13 +144,54 @@
 
 <script>
 	export default {
-
 		data(){
-
 			return{
-
+				addUserInfo: {
+					name: '',
+					userName: '',
+					telephone: '',
+					passPwd: '',
+					truePassWord: '',
+					
+				}
 			}
-		}
+		},
+		created() {
+		},
+		methods: {
+			addUser() {
+				if(!this.getTotal('User') == true) {
+					return false;
+				}
+				if(this.addUserInfo.passPwd != this.addUserInfo.truePassWord) {
+					alert("密码不一致");
+					return false
+				}
+				this.$ajax.post('/control/adduser', this.addUserInfo)
+				.then(res => {
+					console.log(res.data.smallErr_code)
+					if(res.data.smallErr_code == 0) {
+						console.log("添加完用户刷新")
+						this.$router.go(0);
+					}
+				})
+				.catch(err => {
+					console.log(err)
+				})
+			},
+			getTotal(title){
+			    this.$ajax.get('/control/getTotal?name='+title)
+			    .then(res => {
+			      if(res.data > 6) {
+							alert('不能在设置更多用户了');
+							return false;
+						}
+			    })
+			    .catch(err => {
+			        console.log(err);
+			    })
+			},
+		},
 	}
 </script>
 <style></style>

@@ -32,5 +32,13 @@ const articleSchema = new Schema({
 	lastTime:{
 	    type: String,
 	},
+	count: {
+		type: Number,
+		default: 0
+	},
+	comment: {
+		type: Number,
+		default: 0
+	},
 })
 module.exports = mongoose.model('Article', articleSchema)

@@ -1,7 +1,11 @@
 const mongoose = require('mongoose')
 mongoose.connect('mongodb://localhost/myblog', { useNewUrlParser: true })
 const Schema = mongoose.Schema
-const userSchema = new Schema({
+const loginLogSchema = new Schema({
+	user_id: {
+		type: String,
+		required: true
+	},
 	name: {
 		type: String,
 		required: true
@@ -18,9 +22,13 @@ const userSchema = new Schema({
 		type: String,
 		required: true
 	},
+	host: {
+		type: String,
+		required: true
+	},
 	createdTime: {
 		type: Date,
 		default: Date.now()
 	}
 })
-module.exports = mongoose.model('User', userSchema)
+module.exports = mongoose.model('LoginLog', loginLogSchema)
