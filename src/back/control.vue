@@ -34,6 +34,7 @@
 		    this.text();
 		},
 		mounted(){
+			// console.log(JSON.parse(localStorage.getItem('login')))
 		},
 	}
 </script>

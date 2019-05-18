@@ -17,7 +17,7 @@
 	          </ul>
 	        </div>
 	        <div role="tabpanel" class="tab-pane centre" id="centre">
-	          <h4><router-link :to="{name: 'login'}">登陆后台</router-link></h4>
+	          <h4><button @click="loginTest()">登陆后台</button></h4>
 	        </div>
 	        <div role="tabpanel" class="tab-pane contact" id="contact">
 	          <h2>Email:<br />
@@ -102,6 +102,13 @@
 				})
 				.catch(err => {
 				})
+			},
+			loginTest() {
+				if('login' in localStorage) {
+					this.$router.push({name:'backIndex'})
+				}else {
+					this.$router.push({name:'login'})
+				}
 			}
 		},
 		watch: {

@@ -1,12 +1,7 @@
 <template>
 	<div class="col-sm-9 col-sm-offset-3 col-md-10 col-lg-10 col-md-offset-2 main" id="main">
-		<h1 class="page-header">操作</h1>
-		<ol class="breadcrumb">
-			<li><router-link :to="{ name: 'addArticle' }">增加文章</router-link></li>
-		</ol>
 		<h1 class="page-header">
-			管理
-			<span class="badge">{{ dataTotal }}</span>
+			管理<span class="badge">{{ dataTotal }}</span>
 		</h1>
 		<div class="table-responsive">
 			<table class="table table-striped table-hover">
@@ -18,7 +13,7 @@
 						</th>
 						<th>
 							<span class="glyphicon glyphicon-file"></span>
-							<span class="">标题</span>
+							<span class="">名称</span>
 						</th>
 						<th>
 							<span class="glyphicon glyphicon-list"></span>
@@ -26,11 +21,11 @@
 						</th>
 						<th class="hidden-sm">
 							<span class="glyphicon glyphicon-comment"></span>
-							<span class="">评论条数</span>
+							<span class="">上传时间</span>
 						</th>
 						<th>
 							<span class="glyphicon glyphicon-time"></span>
-							<span class="">创建时间</span>
+							<span class="">上传者</span>
 						</th>
 						<th>
 							<span class="glyphicon glyphicon-pencil"></span>
@@ -41,13 +36,13 @@
 				<tbody>
 					<tr v-for="(item, index) in dataList" :key="index">
 						<td>{{ index + 1 }}</td>
-						<td class="article-title">{{ item.title }}</td>
-						<td>{{ item.category }}</td>
-						<td class="hidden-sm">0</td>
-						<td>{{ detailTime[index] }}</td>
+						<td class="article-title">{{ item.videoName }}</td>
+						<td>{{ item.filePath }}</td>
+						<td class="hidden-sm">{{item.createdTime}}</td>
+						<td>{{ item.userName }}</td>
 						<td>
-							<router-link :to="{ name: 'updateArticle', query: { _id: item._id } }">修改</router-link>
-							<a @click="deleteArticle(item._id)">删除</a>
+							<router-link :to="{name: 'videoPlay', query: {videoName: item.videoName, filePath: item.filePath}}">播放</router-link>
+							<a @click=" deleteVideo(item._id, item.videoName, item.filePath)">删除</a>
 						</td>
 					</tr>
 				</tbody>
@@ -71,7 +66,7 @@
 	</div>
 </template>
 <script>
-import time from '../../static/js/mytimer.js';
+import time from '../static/js/mytimer.js';
 export default {
 	data() {
 		return {
@@ -82,10 +77,9 @@ export default {
 		};
 	},
 	inject: ['reload'],
-	created() {
+	mounted() {
 		this.initLoad(this.indexPage);
 	},
-	mounted() {},
 	methods: {
 		handleSizeChange(val) {},
 		handleCurrentChange(val) {
@@ -101,16 +95,14 @@ export default {
 		},
 		initLoad(indexPage) {
 			this.$ajax
-				.get('/control/article?indexPage=' + indexPage)
+				.get('/control_videoList?indexPage=' + indexPage)
 				.then(res => {
-					this.dataList = res.data;
-					var temp = [];
-					var tempTime = [];
+					this.dataList = res.data
 					for (var i = 0; i < this.dataList.length; i++) {
-						tempTime[i] = time(Number(this.dataList[i].createdTime));
+						//时间戳是整形的数据，而我们接收到的数据是在一个字符串，所以我们要转换一下数据类型
+						this.dataList[i].createdTime = time(Number(this.dataList[i].createdTime));
 					}
-					this.detailTime = tempTime;
-					this.getTotal('Article');
+					this.getTotal('Video');
 				})
 				.catch(err => {
 					this.$router.push({ name: 'error404' });
@@ -123,18 +115,17 @@ export default {
 					this.dataTotal = res.data;
 				})
 				.catch(err => {
-					console.log(err);
+					this.$router.push({ name: 'error404' });
 				});
 		},
-		deleteArticle(id) {
+		 deleteVideo(id, videoName, filePath) {
 			this.$ajax
-				.get('/control/deleteArticle?_id=' + id)
+				.get('/control_deleteVideo?_id=' + id + '&videoName=' + videoName + '&filePath=' + filePath)
 				.then(res => {
 					this.reload();
-					this.open(res.data.msg, res.data.msgTitle);
 				})
 				.catch(err => {
-					console.log(err);
+					this.$router.push({ name: 'error404' });
 				});
 		}
 	}

@@ -5,14 +5,10 @@ mongoose.connect('mongodb://localhost/myblog', { useNewUrlParser: true })
 //实例Schema
 const Schema = mongoose.Schema
 //构建Schema结构
-const categorySchema = new Schema({
-	category: {
+const imageCategorySchema = new Schema({
+	imageCategory:{
 		type: String,
 		required: true
-	},
-	articleCount: {
-		type: Number,
-		default: 0
 	}
 })
-module.exports = mongoose.model('Category', categorySchema)
+module.exports = mongoose.model('imageCategory', imageCategorySchema)

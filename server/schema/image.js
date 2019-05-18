@@ -1,8 +1,12 @@
 const mongoose = require('mongoose')
 mongoose.connect('mongodb://localhost/myblog', { useNewUrlParser: true })
 const Schema = mongoose.Schema
-const userSchema = new Schema({
-	name: {
+const imageSchema = new Schema({
+	imageName: {
+		type: String,
+		required: true
+	},
+	filePath: {
 		type: String,
 		required: true
 	},
@@ -10,25 +14,13 @@ const userSchema = new Schema({
 		type: String,
 		required: true
 	},
-	telephone: {
+	size: {
 		type: Number,
 		required: true
 	},
-	passPwd: {
-		type: String,
-		required: true
-	},
 	createdTime: {
-		type: Date,
-		default: Date.now()
-	},
-	imageName: {
 		type: String,
-		default: 'icon.png'
-	},
-	filePath: {
-		type: String,
-		default: 'head_pic'
+		require: true
 	}
 })
-module.exports = mongoose.model('User', userSchema)
+module.exports = mongoose.model('image', imageSchema)

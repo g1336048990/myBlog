@@ -17,16 +17,18 @@ var app = express()
 
 //配置跨域请求
 app.all('*',function (req, res, next) {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Headers', 'Content-Type, Content-Length, Authorization, Accept, X-Requested-With');
-  res.header('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS');
-　next();　
-});
+  res.header('Access-Control-Allow-Origin', '*')
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Content-Length, Authorization, Accept, X-Requested-With')
+  res.header('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS')
+　next()　
+})
 //配置body-parser解析post,放置在路由前
 app.use(bodyParser.urlencoded({ entended: false}))
 app.use(bodyParser.json())
-//
-app.use("/static", express.static(__dirname))
+//开放静态资源访问
+// app.use("/static", express.static(__dirname))
+app.use(express.static(__dirname + '\\images'))
+app.use(express.static(__dirname + '\\videos'))
 //挂载路由
 app.use(router)
 

@@ -25,7 +25,6 @@ export default {
 			}
 		};
 	},
-	created() {},
 	methods: {
 		login() {
 			this.$ajax
@@ -62,7 +61,6 @@ export default {
 				});
 		}
 	},
-	watch: {}
 };
 </script>
 <style lang="less" scoped>

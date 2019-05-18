@@ -38,12 +38,27 @@ import 'iview/dist/styles/iview.css';
 //挂载element-ui
 Vue.use(ElementUI);
 Vue.use(Iview);
-
+/**
+ * vuex
+ */
 import Vuex from 'vuex'
 import store from './store.js'
 Vue.use(Vuex)
 
-//引入jq
+/**
+ * videoplayer 视频播放器
+ */
+import VideoPlayer from 'vue-video-player'
+// import 'videojs-contrib-hls';
+Vue.use(VideoPlayer)
+/**
+ * 引入视频样式文件
+ */
+import 'video.js/dist/video-js.css'
+import 'vue-video-player/src/custom-theme.css'
+// import 'videojs-contrib-hls/dist/videojs-contrib-hls'
+
+
 
 // 引入自定义样式
 // 引入自定义js

@@ -5,8 +5,8 @@
         <div class="col-md-5">
           <h1 class="page-header">添加</h1>
 					<div class="form-group">
-						<label for="category-name">文章栏目名称</label>
-						<input type="text" class="form-control" placeholder="在此处输入栏目名称" required autocomplete="off" v-model="data.category">
+						<label for="category-name">图片分类</label>
+						<input type="text" class="form-control" placeholder="在此处输入栏目名称" required autocomplete="off" v-model="data.imageCategory">
 					</div>
 					<button class="btn btn-primary" @click="submitData()">添加新栏目</button>
         </div>
@@ -25,8 +25,8 @@
               <tbody>
                 <tr v-for="(item, index) in datas" :key="index">
                   <td>{{index+1}}</td>
-                  <td>{{item.category}}</td>
-                  <!-- <td>{{0}}</td> -->
+                  <td>{{item.imageCategory}}</td>
+                  <!-- <td>0</td> -->
                   <td><a @click="deleteCategory()">暂时不设置删除功能</a></td>
                 </tr>
               </tbody>
@@ -41,8 +41,7 @@
     data(){
       return{
 				data:{
-					category: "",
-					totals: 0
+					imageCategory: ""
 				},
 				datas:[]
       }
@@ -55,10 +54,10 @@
 			//新增栏目
 			submitData(){
 				if(this.data.category === ""){
-					console.log("没有数据，请填写内容！！！");
+					alert('请填写内容！！')
 					return false;
 				}
-				this.$ajax.post("/control/addCategory", this.data)
+				this.$ajax.post("/control_addImageCategory", this.data)
 				.then(res => {
 					this.reload();
 				})
@@ -68,21 +67,13 @@
 			},
 			//初始化表格
 			getData(){
-				this.$ajax.get("/control/category")
+				this.$ajax.get("/control_ImageCategory")
 				.then(res => {
 					this.datas = res.data;
 				})
 				.catch(err => {
 					
 				})
-			},
-			getTotal(title, category){
-			    this.$ajax.get('/control/getTotal?name='+title+'&category='+category)
-			    .then(res => {
-			      this.totals = res.data;
-			    })
-			    .catch(err => {
-			    })
 			},
 			//删除栏目
 			deleteCategory(){

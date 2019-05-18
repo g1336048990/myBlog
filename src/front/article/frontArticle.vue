@@ -28,7 +28,9 @@
 						</div>
 					</header>
 					<article class="article-content">
-						 <p class="text-indent" v-for="(item, index) in content" :key="index">{{ item }}</p>
+						<div v-for="(item, index) in content" :key="index">
+							 <pre class="text-indent">{{ item }}</pre>
+						</div>
 					</article>
 					<!-- <div class="article-tags">
 						标签：
@@ -161,6 +163,7 @@ export default {
 			const id = this.$route.query;
 			this.$ajax.get('/view/article?_id=' + id._id)
 				.then(res => {
+					console.log(res.data.content)
 					this.dataList = res.data;
 					this.commentOne.articleid = res.data._id;
 					this.commentOne.comment.comment = '';
@@ -191,6 +194,9 @@ export default {
 			this.$ajax.get('/view/comment?articleid='+this.commentOne.articleid)
 			.then( res => {
 				if('comment' in res.data) {
+					for(let i = 0; i < res.data.comment.length; i++) {
+						res.data.comment[i].createTime = time(Number(res.data.comment[i].createTime))
+					}
 					this.commentList = res.data.comment.reverse();
 					this.commentLists = this.commentList.slice(0, 10);
 				}

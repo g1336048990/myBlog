@@ -8,6 +8,7 @@
 	export default{
 		data(){
 			return{
+				isRouterAlive:true
 			}
 		},
 		name:'app',
@@ -16,10 +17,7 @@
 			    reload:this.reload
 			}
 		},
-		data(){
-			return{
-				isRouterAlive:true
-			}
+		mounted() {
 		},
 		methods:{
 			reload(){
@@ -31,7 +29,10 @@
 		},
 		watch: {
 			$route(to, from) {
-				if((/login/.test(to.path) || /login/.test(from.path)) && !(/loginLog/.test(to.path) || /loginLog/.test(from.path))) {
+				if((/login/.test(to.path) || /login/.test(from.path)) && !(/loginLog/.test(to.path) || /loginLog/.test(from.path) || /loginImage/.test(to.path) || /loginImage/.test(from.path))) {
+					location.reload()
+				}
+				if(/views/.test(from.path) && /control/.test(to.path)) {
 					location.reload()
 				}
 			}

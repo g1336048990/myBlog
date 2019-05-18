@@ -25,6 +25,7 @@ import AddArticle from './back/article/addArticle.vue';
 import BackArticle from './back/article/backArticle.vue';
 import UpdateArticle from './back/article/updateArticle.vue';
 import BackCategory from './back/category/backCategory.vue';
+import ImageCategory from './back/category/imageCategory.vue';
 import Comment from './back/common/comment.vue';
 import Comments from './back/common/comments.vue';
 import BackIndex from './back/index/backIndex.vue';
@@ -36,6 +37,13 @@ import BackNotice from './back/notice/backNotice.vue';
 import UpdateNotice from './back/notice/UpdateNotice.vue';
 import ReadSet from './back/readSet/readSet.vue';
 import Setting from './back/setting/setting.vue';
+import VideoPlay from './back/videoPlay.vue'
+import VideoUpload from './back/videoUpload.vue'
+import ImageUpload from './back/imageUpload.vue'
+import VideoList from './back/videoList.vue'
+import ImageList from './back/imageList.vue'
+import UserImage from './back/userImage.vue'
+import LoginImage from './back/loginImage.vue'
 // 内容结束
 
 
@@ -66,6 +74,7 @@ let router = new VueRouter({
 			{name: 'backArticle', path: 'article', component: BackArticle},
 			{name: 'updateArticle', path: 'updateArticle', component: UpdateArticle},
 			{name: 'backCategory', path: 'Category', component: BackCategory},
+			{name: 'imageCategory', path: 'imageCategory', component: ImageCategory},
 			{name: 'comment', path: 'comment', component: Comment},
 			{name: 'comments', path: 'comments', component: Comments},
 			{name: 'backIndex', path: 'index', component: BackIndex},
@@ -76,6 +85,13 @@ let router = new VueRouter({
 			{name: 'updateNotice', path: 'updateNotice', component: UpdateNotice},
 			{name: 'readSet', path: 'readSet', component: ReadSet},
 			{name: 'setting', path: 'setting', component: Setting},
+			{name: 'videoPlay', path: 'videoPlay', component: VideoPlay},
+			{name: 'videoUpload', path: 'videoUpload', component: VideoUpload},
+			{name: 'imageUpload', path: 'imageUpload', component: ImageUpload},
+			{name: 'videoList', path: 'videoList', component: VideoList},
+			{name: 'imageList', path: 'imageList', component: ImageList},
+			{name: 'userImage', path: 'userImage', component: UserImage},
+			{name: 'loginImage', path: 'loginImage', component: LoginImage},
 		]},
 		{name: 'error', path: '*', component: FrontError}
 	],

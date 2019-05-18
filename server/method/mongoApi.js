@@ -1,9 +1,8 @@
 //增加数据
 module.exports.saveData = function(Obj, jsonData, res){
-	// console.log(Obj, jsonData)
+	// console.log(jsonData)
 	new Obj(jsonData).save(function(savsmallErr){
 		if(savsmallErr){
-			console.log("连接失败");
 			return res.status(500).json({
 				smallErr_code:2,
 				msg:'数据添加失败，请检查服务器！！！',
@@ -11,11 +10,23 @@ module.exports.saveData = function(Obj, jsonData, res){
 			})
 		}
 		console.log("连接成功");
-		return res.status(200).json({
-			smallErr_code:0,
-			msg:'文章添加成功！！！',
-			msgTitle:'恭喜恭喜！！！！！！'
-		})
+		if(('videoName' in jsonData || 'imageName' in jsonData) && 'filePath' in jsonData) {
+			return res.status(200).json({
+				smallErr_code:0,
+				msg:'文章添加成功！！！',
+				msgTitle:'恭喜恭喜！！！！！！',
+				videoName: 'videoName' in jsonData? jsonData.videoName: jsonData.imageName,
+				filePath: jsonData.filePath
+			})
+		}else {
+			console.log('添加文章测试')
+			return res.status(200).json({
+				smallErr_code:0,
+				msg:'文章添加成功！！！',
+				msgTitle:'恭喜恭喜！！！！！！'
+			})
+		}
+		
 	})
 }
 //更新数据
@@ -24,7 +35,21 @@ module.exports.upDate = function(Obj, query, jsonData, res){
 		if(smallErr){
 			throw smallErr;
 		}else {
-			res.status(200).json('chenggong')
+			if(Obj == 'User') {
+				res.status(200).json(jsonData)
+			}else {
+				res.status(200).json('chenggong')
+			}
+			
+		}
+	})
+}
+module.exports.upDate_head_pic = function(Obj, query, jsonData, imageUrl,res){
+	Obj.updateOne(query, jsonData, function(smallErr){
+		if(smallErr){
+			throw smallErr;
+		}else {
+			res.status(200).json(imageUrl)	
 		}
 	})
 }
