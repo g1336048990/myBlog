@@ -113,7 +113,6 @@
 		},
 		watch: {
 			$router (newValue, oldValue) {
-				console.log(newValue)
 			}
 		},
 	}

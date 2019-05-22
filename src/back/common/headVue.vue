@@ -123,7 +123,7 @@
 		},
 	}
 </script>
-<style lang="less">
+<style lang="less" scoped>
   .show_header {
 		font-size: 30px;
 		margin-left: 10px;

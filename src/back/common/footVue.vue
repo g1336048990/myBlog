@@ -151,16 +151,17 @@
 					userName: '',
 					telephone: '',
 					passPwd: '',
-					truePassWord: '',
-					
-				}
+					truePassWord: ''
+				},
+				isTrue: false
 			}
 		},
 		created() {
+			this.getTotal('User')
 		},
 		methods: {
 			addUser() {
-				if(!this.getTotal('User') == true) {
+				if(this.isTrue != true) {
 					return false;
 				}
 				if(this.addUserInfo.passPwd != this.addUserInfo.truePassWord) {
@@ -169,9 +170,7 @@
 				}
 				this.$ajax.post('/control/adduser', this.addUserInfo)
 				.then(res => {
-					console.log(res.data.smallErr_code)
 					if(res.data.smallErr_code == 0) {
-						console.log("添加完用户刷新")
 						this.$router.go(0);
 					}
 				})
@@ -183,8 +182,10 @@
 			    this.$ajax.get('/control/getTotal?name='+title)
 			    .then(res => {
 			      if(res.data > 6) {
-							alert('不能在设置更多用户了');
-							return false;
+							alert('不能在设置更多用户了')
+							this.isTrue = false
+						}else {
+							this.isTrue = true
 						}
 			    })
 			    .catch(err => {

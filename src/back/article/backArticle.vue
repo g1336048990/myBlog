@@ -6,7 +6,13 @@
 		</ol>
 		<h1 class="page-header">
 			管理
-			<span class="badge">{{ dataTotal }}</span>
+			<span class="badge">{{ dataList.length }}</span>
+			<!-- <select class="select_position" v-model="selected">
+				<option style="font-size: 10px;" disabled value="" selected>请选择属性</option>
+				<option style="font-size: 10px;" v-for="cate in category" v-bind:key="cate.category">{{ cate.category }}</option>
+			</select> -->
+			<input type="text" class="input_position" v-model="search_data" placeholder="请输入要查询的文章标题">
+			<!-- <button class="button_position">搜索</button> -->
 		</h1>
 		<div class="table-responsive">
 			<table class="table table-striped table-hover">
@@ -28,6 +34,10 @@
 							<span class="glyphicon glyphicon-comment"></span>
 							<span class="">评论条数</span>
 						</th>
+						<th class="hidden-sm">
+							<span class="glyphicon glyphicon-comment"></span>
+							<span class="">点击次数</span>
+						</th>
 						<th>
 							<span class="glyphicon glyphicon-time"></span>
 							<span class="">创建时间</span>
@@ -43,7 +53,8 @@
 						<td>{{ index + 1 }}</td>
 						<td class="article-title">{{ item.title }}</td>
 						<td>{{ item.category }}</td>
-						<td class="hidden-sm">0</td>
+						<td class="hidden-sm">{{item.comment}}</td>
+						<td class="hidden-sm">{{item.count}}</td>
 						<td>{{ detailTime[index] }}</td>
 						<td>
 							<router-link :to="{ name: 'updateArticle', query: { _id: item._id } }">修改</router-link>
@@ -63,7 +74,7 @@
 						:page-sizes="[10]"
 						:page-size="10"
 						layout="total, sizes, prev, pager, next, jumper"
-						:total="dataTotal"
+						:total="dataList.length"
 					></el-pagination>
 				</div>
 			</nav>
@@ -78,14 +89,19 @@ export default {
 			detailTime: [],
 			dataList: [],
 			dataTotal: 0,
-			indexPage: 0
+			indexPage: 0,
+			category: [],
+			selected: '',
+			search_data: ''
 		};
 	},
 	inject: ['reload'],
-	created() {
-		this.initLoad(this.indexPage);
+	mounted() {
+		this.initLoad(this.indexPage)
+		// this.request_api.request_article_category(data => {
+		// 	this.category = data
+		// })
 	},
-	mounted() {},
 	methods: {
 		handleSizeChange(val) {},
 		handleCurrentChange(val) {
@@ -136,8 +152,54 @@ export default {
 				.catch(err => {
 					console.log(err);
 				});
+		},
+		getData() {
+			this.$ajax
+				.get('/control/category')
+				.then(res => {
+					this.category = res.data 
+				})
+				.catch(err => {}) 
+		},
+		submit_serach() {
+			
 		}
-	}
+	},
+	watch: {
+		search_data(newValue, oldValue) {
+			if(newValue != '') {
+				this.request_api.request_search_data(newValue, 'article', data => {
+					this.dataList = data
+					for (var i = 0; i < this.dataList.length; i++) {
+						this.dataList[i].createdTime = time(Number(this.dataList[i].createdTime));
+					}
+				})
+			}else {
+				this.initLoad(0)
+			}
+		}
+	},
 };
 </script>
-<style scoped></style>
+<style scoped>
+	.input_position {
+		font-size: 10px;
+    width: 200px;
+    height: 30px;
+    top: -5px;
+    position: relative;
+	}
+	.button_position {
+		font-size: 10px;
+    width: 50px;
+    height: 30px;
+    top: -6px;
+    position: relative;
+	}
+	.select_position {
+		height: 30px;
+    position: relative;
+    top: -5px;
+		font-size: 10px;
+	}
+</style>

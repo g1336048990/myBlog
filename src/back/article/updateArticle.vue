@@ -10,7 +10,8 @@
                 <div class="form-group">
                     <label for="article-content" class="sr-only">内容</label>
                     <!-- 富文本编辑器 -->
-                    <UE ref="ue"></UE>
+                    <!-- <UE ref="ue"></UE> -->
+					<textarea class="textarea_word" cols="40" rows="20" wrap="hard" v-model="dataList.content" placeholder="请填写文章内容.................."></textarea>
                 </div>
             </div>
             <div class="col-md-3">
@@ -100,7 +101,6 @@
                 })
             },
             updataArticle(){
-                this.dataList.content = this.$refs.ue.getUEContent();
                 this.dataList.lastTime = new Date().getTime();
                 this.dataList.createdTime = this.createdTime;
                 this.$ajax.post('/control/updateArticle', this.dataList)
@@ -121,6 +121,11 @@
     }
 </script>
 <style scoped>
+	.textarea_word {
+		width: 100%;
+		height: 100%;
+		border-radius: 5px;
+	}
 </style>
 
 

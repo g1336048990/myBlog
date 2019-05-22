@@ -1,42 +1,43 @@
-import Vue from 'vue';
+import Vue from 'vue'
 // 引入路由
-import VueRouter from 'vue-router';
+import VueRouter from 'vue-router'
 // 挂载路由
-Vue.use(VueRouter);
+Vue.use(VueRouter)
 
 //登录页面
-import Login from './login/backLogin.vue';
+import Login from './login/backLogin.vue'
 
 // 自定义组件引入(前台)
 //父视图
-import Views from './front/views.vue';
+import Views from './front/views.vue'
 // 内容开始
-import FrontArticle from './front/article/frontArticle.vue';
-import FrontError from './front/error/error.vue';
-import FrontIndex from './front/index/frontIndex.vue';
+import FrontArticle from './front/article/frontArticle.vue'
+import FrontVideo from './front/frontVideo.vue'
+import FrontImage from './front/frontImage.vue'
+import FrontError from './front/error/error.vue'
+import FrontIndex from './front/index/frontIndex.vue'
 
 // 内容结束
-
 //自定义组件引入（后台）
 //父视图
-import Control from './back/control.vue';
+import Control from './back/control.vue'
 // 内容开始
-import AddArticle from './back/article/addArticle.vue';
-import BackArticle from './back/article/backArticle.vue';
-import UpdateArticle from './back/article/updateArticle.vue';
-import BackCategory from './back/category/backCategory.vue';
-import ImageCategory from './back/category/imageCategory.vue';
-import Comment from './back/common/comment.vue';
-import Comments from './back/common/comments.vue';
-import BackIndex from './back/index/backIndex.vue';
+import AddArticle from './back/article/addArticle.vue'
+import BackArticle from './back/article/backArticle.vue'
+import UpdateArticle from './back/article/updateArticle.vue'
+import BackCategory from './back/category/backCategory.vue'
+import ImageCategory from './back/category/imageCategory.vue'
+import Comment from './back/common/comment.vue'
+import Comments from './back/common/comments.vue'
+import BackIndex from './back/index/backIndex.vue'
 
-import BackLoginLog from './back/login/backLoginLog.vue';
-import ManageUser from './back/manage/manageUser.vue';
-import AddNotice from './back/notice/addNotice.vue';
-import BackNotice from './back/notice/backNotice.vue';
-import UpdateNotice from './back/notice/UpdateNotice.vue';
-import ReadSet from './back/readSet/readSet.vue';
-import Setting from './back/setting/setting.vue';
+import BackLoginLog from './back/login/backLoginLog.vue'
+import ManageUser from './back/manage/manageUser.vue'
+import AddNotice from './back/notice/addNotice.vue'
+import BackNotice from './back/notice/backNotice.vue'
+import UpdateNotice from './back/notice/UpdateNotice.vue'
+import ReadSet from './back/readSet/readSet.vue'
+import Setting from './back/setting/setting.vue'
 import VideoPlay from './back/videoPlay.vue'
 import VideoUpload from './back/videoUpload.vue'
 import ImageUpload from './back/imageUpload.vue'
@@ -67,6 +68,8 @@ let router = new VueRouter({
 		{name: 'views', path: '/views', component: Views, children:[
 			{name: 'frontIndex', path: 'index', component: FrontIndex},
 			{name: 'frontArticle', path: 'article', component: FrontArticle},
+			{name: 'frontImage', path: 'frontImage', component: FrontImage},
+			{name: 'frontVideo', path: 'frontVideo', component: FrontVideo}
 		]},
 		//后台视图
 		{name: 'control', path: '/control', component: Control, children:[

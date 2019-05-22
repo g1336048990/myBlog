@@ -8,6 +8,7 @@ var express = require('express')
 // var proxy = require('http-proxy-middleware')
 //引入路由
 var router = require('./router')
+var common_router = require('./routes/common')
 var bodyParser = require('body-parser')
 /*
  *插件使用
@@ -31,7 +32,8 @@ app.use(express.static(__dirname + '\\images'))
 app.use(express.static(__dirname + '\\videos'))
 //挂载路由
 app.use(router)
-
+app.use(common_router)
+// app.use('/control', common_router)
 
 app.listen(8889, function(){
 	console.log(`Server is running at date ${new Date()} and port is 8889....................`)

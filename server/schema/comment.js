@@ -10,5 +10,9 @@ const commentSchema = new Schema({
 		type: Array,
 		required: true
 	},
+	articleName: {
+		type: String,
+		required: true
+	},
 })
 module.exports = mongoose.model('Comment', commentSchema)

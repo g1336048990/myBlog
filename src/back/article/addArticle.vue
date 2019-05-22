@@ -11,7 +11,7 @@
 					<label for="article-content" class="sr-only">内容</label>
 					<!-- 富文本编辑器 -->
 					<!-- <UE ref="ue"></UE> -->
-					<textarea class="textarea_word" cols="40" rows="20" wrap="physical" v-model="dataList.content" placeholder="请填写文章内容.................."></textarea>
+					<textarea class="textarea_word" cols="40" rows="20" wrap="hard" v-model="dataList.content" placeholder="请填写文章内容.................."></textarea>
 				</div>
 				<div class="add-article-box"></div>
 				<div class="add-article-box"></div>

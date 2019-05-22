@@ -17,7 +17,7 @@
 			    reload:this.reload
 			}
 		},
-		mounted() {
+		mounted() {	
 		},
 		methods:{
 			reload(){
@@ -36,8 +36,7 @@
 					location.reload()
 				}
 			}
-		},
-		
+		}
 	}
 </script>
 <style lang="less" scoped>

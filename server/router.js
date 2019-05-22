@@ -1,13 +1,23 @@
-//引入核心模块
+/**
+ * 引入核心模块
+ */
 const express = require('express')
 const formidable = require('formidable')
 const path = require('path')
 const fs = require('fs')
 
+/**
+ * videoPath 视频服务器存放路径
+ * imagePath 图片服务其存放路径
+ */
 const videoPath = __dirname + '\\videos'
 const imagePath = __dirname + '\\images'
 
-//引入shcema
+
+
+/**
+ * 引入表结构
+ */
 const Article = require('./schema/article')
 const Notice = require('./schema/notice')
 const Category = require('./schema/category')
@@ -24,34 +34,37 @@ const mongoApi = require('./method/mongoApi')
 //实例路由
 const router = express.Router()
 
-// 配置全局路由拦截器，拦截不是规则内的请求,后期优化使用switch提高运行速度
-router.all('*', (req, res, next) => {
-	if(/control/.test(req.url)){
-		next() 
-	}else if(/view/.test(req.url)){
-		next() 
-	}else if(req.url.indexOf('/localhost') == 0){
-		next() 
-	}else if(req.url.indexOf('/change') == 0){
-		next() 
-	}else if(/login/.test(req.url)) {
-		next() 
-	}else if(/delete_loginLogs/.test(req.url)) {
-		next()
-	}else if(/upload_video/.test(req.url)) {
-		next()
-	}else if(/upload_pic/.test(req.url)) {
-		next()
-	}
-	
-	else{
-		return res.status(404).json({
-			err_code:3,
-			msg:'请求错误，请检查请求路径是否正常！！！！',
-			msgTitle:'请求错误'
-		}) 
-	}
-})
+
+/**
+ * 配置全局路由拦截器，拦截不是规则内的请求,后期优化使用switch提高运行速度
+ * res_code 0为正常数据 1为错误数据
+ */
+// router.all('*', (req, res, next) => {
+// 	if(/control/.test(req.url)){
+// 		next() 
+// 	}else if(/view/.test(req.url)){
+// 		next() 
+// 	}else if(req.url.indexOf('/localhost') == 0){
+// 		next() 
+// 	}else if(req.url.indexOf('/change') == 0){
+// 		next() 
+// 	}else if(/login/.test(req.url)) {
+// 		next() 
+// 	}else if(/delete_loginLogs/.test(req.url)) {
+// 		next()
+// 	}else if(/upload_video/.test(req.url)) {
+// 		next()
+// 	}else if(/upload_pic/.test(req.url)) {
+// 		next()
+// 	}
+// 	else{
+// 		return res.status(404).json({
+// 			err_code:3,
+// 			msg:'请求错误，请检查请求路径是否正常！！！！',
+// 			msgTitle:'请求错误'
+// 		}) 
+// 	}
+// })
 
 
 router.post('/localhost', (req, res) => {
@@ -98,7 +111,7 @@ router.get('/delete_loginLogsById', (req, res) => {
 /*-------------------------------------------分割线（Article配置）-------------------------------------------*/
 //显示数据库里面的所有文章
 router.get('/control/article', function(req, res){
-	const condition = {title:1, category:1, tags:1, createdTime:1} 
+	const condition = {title:1, category:1, tags:1, createdTime:1, comment:1, count:1} 
 	const timeCondition = {createdTime:-1} 
 	mongoApi.someFind(Article, success, condition, timeCondition, req.query.indexPage) 
 	function success(data){
@@ -157,31 +170,22 @@ router.get('/control/updateArticle', function(req ,res){
 	mongoApi.idFind(Article, req.query._id, success) 
 	function success(data){
 		return res.status(200).json(data) 
+		
 	}
 })
 //提交修改后的文章
 router.post('/control/updateArticle', function(req ,res){
-	req.body.content = req.body.content.replace(/\n/gi, "<br />") 
 	mongoApi.idFind(Article, req.body._id, success) 
 	function success(data){
-		mongoApi.upDate(Article, {_id:req.body._id}, {$set:req.body}, res) 
-		return res.status(200).json({
-			err_code:0,
-			msg:'修改成功，返回页面！！',
-			msgTitle:'修改成功',
-		}) 
+		mongoApi.upDate(Article, {_id:req.body._id}, {$set:req.body}, res)
 	}
 })
 //删除文章
 router.get('/control/deleteArticle', function(req ,res){
+	console.log('文章删除共呢个进入')
 	mongoApi.idFind(Article, req.query._id, success) 
 	function success(data){
 		mongoApi.idDelete(Article, {_id:req.query._id}, res) 
-		return res.status(200).json({
-				err_code:0,
-				msg:'删除成功，返回页面！！',
-				msgTitle:'删除成功',
-		}) 
 	}
 	console.log('---------华丽而又不失优雅的分割线--------') 
 })
@@ -236,26 +240,15 @@ router.get('/control/updateNotice', function(req ,res){
 router.post('/control/updateNotice', function(req ,res){
 	mongoApi.idFind(Notice, req.body._id, success) 
 	function success(data){
-		mongoApi.upDate(Notice, {_id:req.body._id}, {$set:req.body}, res) 
-		return res.status(200).json({
-			err_code:0,
-			msg:'修改成功，返回页面！！',
-			msgTitle:'修改成功',
-		}) 
+		mongoApi.upDate(Notice, {_id:req.body._id}, {$set:req.body}, res)
 	}
 })
 //删除文章
 router.get('/control/deleteNotice', function(req ,res){
 	mongoApi.idFind(Notice, req.query._id, success) 
 	function success(data){
-		mongoApi.idDelete(Notice, {_id:req.query._id}, res) 
-		return res.status(200).json({
-				err_code:0,
-				msg:'删除成功，返回页面！！',
-				msgTitle:'删除成功',
-		}) 
+		mongoApi.idDelete(Notice, {_id:req.query._id}, res)
 	}
-	console.log('---------华丽而又不失优雅的分割线--------') 
 })
 
 

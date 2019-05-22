@@ -36,12 +36,12 @@
 						标签：
 						<a href="" rel="tag">{{ dataList.category }}</a>
 					</div> -->
-					<div class="relates">
+					<!-- <div class="relates">
 						<div class="title"><h3>相关推荐</h3></div>
-						<ul>
+						<ul> -->
 							<!-- <li v-for="(item, index) in "><a href="article.html">{{php如何判断一个日期的格式是否正确}}</a></li> -->
-						</ul>
-					</div>
+						<!-- </ul>
+					</div> -->
 					<div class="title" id="comment"><h3>评论</h3></div>
 					<!-- <div id="respond">
 		        <div class="comment-signarea">
@@ -109,6 +109,7 @@ export default {
 			recordCount: {},
 			commentOne: {
 				articleid: '',
+				articleName: '',
 				comment: {
 					name: location.host,
 					createTime: '',
@@ -163,9 +164,9 @@ export default {
 			const id = this.$route.query;
 			this.$ajax.get('/view/article?_id=' + id._id)
 				.then(res => {
-					console.log(res.data.content)
 					this.dataList = res.data;
 					this.commentOne.articleid = res.data._id;
+					this.commentOne.articleName = res.data.title
 					this.commentOne.comment.comment = '';
 					this.content = res.data.content.split('<br />');
 					this.dataList.createdTime = time(Number(this.dataList.createdTime));
@@ -179,7 +180,6 @@ export default {
 			if(this.commentOne.comment.comment === ""){
 				return false;
 			}
-			console.log(this.commentOne)
 			this.commentOne.comment.createTime = Date.now();
 			this.$ajax.post('/view/comment', this.commentOne)
 			.then( res => {

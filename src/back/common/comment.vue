@@ -2,7 +2,8 @@
 	<div class="col-sm-9 col-sm-offset-3 col-md-10 col-lg-10 col-md-offset-2 main" id="main">
 		<h1 class="page-header">
 			管理
-			<span class="badge">{{ dataTotal }}</span>
+			<span class="badge">{{ dataList.length }}</span>
+			<input type="text" class="input_position" v-model="search_data" placeholder="请输入要查询的该评论所属文章标题">
 		</h1>
 		<div class="table-responsive">
 			<table class="table table-striped table-hover">
@@ -11,6 +12,10 @@
 						<th>
 							<span class="glyphicon glyphicon-th-large"></span>
 							<span class="">序号</span>
+						</th>
+						<th>
+							<span class="glyphicon glyphicon-file"></span>
+							<span class="">文章_id</span>
 						</th>
 						<th>
 							<span class="glyphicon glyphicon-file"></span>
@@ -29,7 +34,8 @@
 				<tbody>
 					<tr v-for="(item, index) in dataList" :key="index">
 						<td>{{ index + 1 }}</td>
-						<td class="Notice-title">{{ item.articleid }}</td>
+						<td>{{ item.articleid }}</td>
+						<td>{{ item.articleName }}</td>
 						<td>{{ item.comment.length }}</td>
 						<td><router-link :to="{ name: 'comments', query: { _id: item._id } }">查看详细评论</router-link></td>
 					</tr>
@@ -46,7 +52,7 @@
 						:page-sizes="[10]"
 						:page-size="10"
 						layout="total, sizes, prev, pager, next, jumper"
-						:total="dataTotal"
+						:total="dataList.length"
 					></el-pagination>
 				</div>
 			</nav>
@@ -61,7 +67,8 @@ export default {
 			detailTime: [],
 			dataList: [],
 			dataTotal: 0,
-			indexPage: 0
+			indexPage: 0,
+			search_data: ''
 		};
 	},
 	inject: ['reload'],
@@ -121,7 +128,29 @@ export default {
 					console.log(err);
 				});
 		}
-	}
+	},
+	watch: {
+		search_data(newValue, oldValue) {
+			if(newValue != '') {
+				this.request_api.request_search_data(newValue, 'comment', data => {
+					this.dataList = data
+					for (var i = 0; i < this.dataList.length; i++) {
+						this.dataList[i].createdTime = time(Number(this.dataList[i].createdTime));
+					}
+				})
+			}else {
+				this.initLoad(0)
+			}
+		}
+	},
 };
 </script>
-<style scoped></style>
+<style scoped>
+	.input_position {
+		font-size: 10px;
+	  width: 200px;
+	  height: 30px;
+	  top: -5px;
+	  position: relative;
+	}
+</style>

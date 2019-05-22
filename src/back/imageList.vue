@@ -1,7 +1,8 @@
 <template>
 	<div class="col-sm-9 col-sm-offset-3 col-md-10 col-lg-10 col-md-offset-2 main" id="main">
 		<h1 class="page-header">
-			管理<span class="badge">{{ dataTotal }}</span>
+			管理<span class="badge">{{ dataList.length }}</span>
+			<input type="text" class="input_position" v-model="search_data" placeholder="请输入要查询的图片名字">
 		</h1>
 		<!-- <select v-model="selected">
 			<option disabled value="" selected>请选择属性</option>
@@ -69,7 +70,7 @@
 						:page-sizes="[10]"
 						:page-size="10"
 						layout="total, sizes, prev, pager, next, jumper"
-						:total="dataTotal"
+						:total="dataList.length"
 					></el-pagination>
 				</div>
 			</nav>
@@ -86,13 +87,11 @@ export default {
 			dataTotal: 0,
 			indexPage: 0,
 			imageCategory: [],
-			selected: ''
+			selected: '',
+			search_data: ''
 		};
 	},
 	inject: ['reload'],
-	created() {
-		
-	},
 	mounted() {
 		this.initLoad(this.indexPage)
 		this.getData()
@@ -155,8 +154,17 @@ export default {
 		}
 	},
 	watch: {
-		selected(newValue, oldValue) {
-			// this.initLoad(0)
+		search_data(newValue, oldValue) {
+			if(newValue != '') {
+				this.request_api.request_search_data(newValue, 'image', data => {
+					this.dataList = data
+					for (var i = 0; i < this.dataList.length; i++) {
+						this.dataList[i].createdTime = time(Number(this.dataList[i].createdTime));
+					}
+				})
+			}else {
+				this.initLoad(0)
+			}
 		}
 	},
 };
@@ -165,5 +173,12 @@ export default {
 	.show_pic {
 		width: 60px;
 		height: 30px;
+	}
+	.input_position {
+		font-size: 10px;
+	  width: 200px;
+	  height: 30px;
+	  top: -5px;
+	  position: relative;
 	}
 </style>

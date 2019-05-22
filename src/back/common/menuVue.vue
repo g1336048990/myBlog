@@ -33,24 +33,26 @@
 					    </ul>
 					  </li>
 					</ul> -->
-					<ul class="nav nav-sidebar">
+					<!-- <ul class="nav nav-sidebar">
 					  <li><a class="dropdown-toggle" id="otherMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">视频设置</a>
-					    <ul class="dropdown-menu" aria-labelledby="otherMenu">
+					    <ul class="dropdown-menu" aria-labelledby="otherMenu"> -->
+							<ul class="nav nav-sidebar">
 					      <li><router-link :to="{name:'videoUpload'}">视频上传</router-link></li>
 								<li><router-link :to="{name:'videoList'}">视频列表</router-link></li>
 								<!-- <li><router-link :to="{name:'videoPlay'}">视频播放</router-link></li> -->
 					    </ul>
-					  </li>
+					  <!-- </li>
 					</ul>
 					<ul class="nav nav-sidebar">
 					  <li><a class="dropdown-toggle" id="otherMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">图片设置</a>
-					    <ul class="dropdown-menu" aria-labelledby="otherMenu">
+					    <ul class="dropdown-menu" aria-labelledby="otherMenu"> -->
+							<ul class="nav nav-sidebar">
 								<li><router-link :to="{name:'imageCategory'}">图片分类</router-link></li>
 					      <li><router-link :to="{name:'imageUpload'}">上传套图</router-link></li>
 								<li><router-link :to="{name:'imageList'}">图片列表</router-link></li>
 					    </ul>
-					  </li>
-					</ul>
+					  <!-- </li>
+					</ul> -->
         </aside>
 </template>
 

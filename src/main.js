@@ -63,7 +63,14 @@ import 'vue-video-player/src/custom-theme.css'
 // 引入自定义样式
 // 引入自定义js
 import getTime from './static/js/mytimer'
-Vue.prototype.timeStrmp = getTime;
+Vue.prototype.timeStrmp = getTime
+
+/**
+ * 引入公用api接口
+ */
+import request_api from './api/request'
+Vue.prototype.request_api = request_api
+
 
 router.beforeEach((to, from, next) => {
 	if(/control/.test(to.path)) {

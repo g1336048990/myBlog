@@ -1,4 +1,5 @@
 function getTime(time){
+	console.log('测试执行顺序 1')
       var data = new Date(time);
       var year = data.getFullYear();
       var month = data.getMonth()+1;
@@ -14,7 +15,6 @@ function getTime(time){
       var mytimer = year+"-"+month+"-"+date+" "+hour+":"+miunte+":"+second
       return mytimer
 }
-
 //方法导出不用加括号
 export default getTime
 

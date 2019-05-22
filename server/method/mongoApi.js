@@ -196,3 +196,22 @@ module.exports.getTenArticle = function(Obj, func, condition, timeCondition){
 		}
 	}).sort(timeCondition).skip(0).limit(10)
 }
+
+
+
+
+
+
+
+
+
+
+module.exports.get_search_data = (Obj, query, func) => {
+	Obj.find(query, function(err, data){
+		if(err){
+			func({code: 1})
+		}else{
+			func(data);
+		}
+	})
+}
